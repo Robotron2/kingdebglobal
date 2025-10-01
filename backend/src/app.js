@@ -13,7 +13,7 @@ app.use( express.json() )
 app.use( morgan( "dev" ) )
 
 app.get( "/", ( req, res ) => {
-    res.send( "🌿 Farm Investment API is running..." )
+    res.json( {message: "kingdeb server is active"} )
 } )
 
 // app.use( "/api/auth", authRoutes )
