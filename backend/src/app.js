@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
-// import authRoutes from "./routes/authRoutes.js"
+import authRoutes from "./routes/authRoutes.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
 
 dotenv.config()
@@ -16,7 +16,7 @@ app.get( "/", ( req, res ) => {
     res.json( {message: "kingdeb server is active"} )
 } )
 
-// app.use( "/api/auth", authRoutes )
+app.use( "/api/auth", authRoutes )
 
 
 
