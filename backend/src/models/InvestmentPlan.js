@@ -11,4 +11,6 @@ const investmentPlanSchema = new mongoose.Schema( {
     createdAt: {type: Date, default: Date.now}
 } )
 
+investmentPlanSchema.index( {name: 1} )
+
 export default mongoose.model( "InvestmentPlan", investmentPlanSchema )
