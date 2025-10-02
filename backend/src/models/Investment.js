@@ -9,15 +9,21 @@ const investmentSchema = new mongoose.Schema( {
     maturityDate: {type: Date, required: true},
     status: {
         type: String,
-        enum: ["active", "completed", "cancelled"],
+        enum: ["active", "completed", "canceled"],
         default: "active"
     },
     payoutStatus: {
         type: String,
-        enum: ["pending", "paid"],
+        enum: ["pending", "paid", "dissolved"],
         default: "pending"
     },
-    transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"}
+    transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"},
+    _meta: {
+        cancelledBy: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+        earnedROI: Number,
+        penalty: Number,
+        refundAmount: Number,
+    }
 
 } )
 

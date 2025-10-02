@@ -3,7 +3,16 @@ export const calcROI = ( amount, percentage ) => {
     return roi
 }
 
-export const calcMaturityDate = ( startDate, durationInDays ) => {
-    let maturityDate = new Date( startDate + durationInDays * 24 * 60 * 60 * 1000 )
-    return maturityDate
+export const calcMaturityDate = ( startDate, durationInDays, opts = {} ) => {
+    const date = new Date( startDate )
+    if ( process.env.NODE_ENV === "dev" ) {
+        // treat durationInDays as minutes
+        date.setMinutes( date.getMinutes() + durationInDays )
+    } else {
+        // normal production mode: days
+        date.setDate( date.getDate() + durationInDays )
+    }
+    return date
 }
+
+export const roundTo2dp = ( num ) => Math.round( ( num + Number.EPSILON ) * 100 ) / 100
