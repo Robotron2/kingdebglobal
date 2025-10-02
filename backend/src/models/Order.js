@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema( {
         enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
         default: "pending"
     },
+    transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"},
     paymentMethod: {type: String, enum: ["paystack", "card", "bank_transfer", "wallet"], required: true},
     createdAt: {type: Date, default: Date.now}
 } )

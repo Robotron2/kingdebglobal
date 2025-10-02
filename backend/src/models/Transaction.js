@@ -5,9 +5,12 @@ const transactionSchema = new mongoose.Schema( {
     type: {type: String, enum: ["investment", "order"], required: true},
     reference: String,
     amount: Number,
-    status: {type: String, enum: ["pending", "successful", "failed"], default: "pending"},
+    relatedInvestment: {type: mongoose.Schema.Types.ObjectId, ref: "Investment"},
+    relatedOrder: {type: mongoose.Schema.Types.ObjectId, ref: "Order"},
+    status: {type: String, enum: ["pending", "successful", "failed", "cancel"], default: "pending"},
     paymentGateway: {type: String, default: "paystack"},
     createdAt: {type: Date, default: Date.now}
+
 } )
 
 transactionSchema.index( {reference: 1} )
