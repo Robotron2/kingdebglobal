@@ -3,6 +3,7 @@ import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import authRoutes from "./routes/authRoutes.js"
+import plansRoutes from "./routes/plansRoute.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.get( "/", ( req, res ) => {
 } )
 
 app.use( "/api/auth", authRoutes )
+app.use( "/api/plans", plansRoutes )
 
 
 
