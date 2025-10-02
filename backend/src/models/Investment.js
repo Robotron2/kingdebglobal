@@ -16,7 +16,9 @@ const investmentSchema = new mongoose.Schema( {
         type: String,
         enum: ["pending", "paid"],
         default: "pending"
-    }
+    },
+    transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"}
+
 } )
 
 export default mongoose.model( "Investment", investmentSchema )
