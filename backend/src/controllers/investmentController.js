@@ -158,6 +158,55 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     } )
 } )
 
+export const requestWithdrawal = catchAsync( async ( req, res, next ) => {
+    const {investmentId} = req.params
+    const userId = req.user._id
+
+    // 1. Validate investment
+    const investment = await Investment.findById( investmentId )
+    if ( !investment ) return next( new ApiError( "Investment not found", 404 ) )
+    if ( !investment.user.equals( userId ) ) return next( new ApiError( "Not your investment", 403 ) )
+    if ( investment.status !== "completed" ) {
+        return next( new ApiError( "Investment has not matured yet", 400 ) )
+    }
+    if ( investment.payoutStatus === "paid" ) {
+        return next( new ApiError( "Investment already withdrawn", 400 ) )
+    }
+    const user = await User.findById( userId )
+    if ( !user.bankAccountNumber && !bankName ) return next( new ApiError( "Please provide valid bank details", 400 ) )
+
+    // total payout (principal + ROI)
+    const totalPayout = investment.amount + investment.roiAmount
+
+    // 2. Create transaction record
+    const tx = await Transaction.create( {
+        user: userId,
+        type: "withdrawal",
+        amount: totalPayout,
+        relatedInvestment: investment._id,
+        status: "pending",
+        description: `Withdrawal for matured investment in plan ${ investment.plan }`
+    } )
+
+    // 3. Na here we go run Paystack Transfer. 
+
+    //On success, else, you know what to do fam
+    tx.status = "successful"
+    investment.payoutStatus = "paid"
+    await tx.save()
+    await investment.save()
+
+    //return something give your users chop
+    return res.status( 200 ).json( {
+        success: true,
+        message: "Withdrawal request processed",
+        data: {
+            transaction: tx,
+            investment
+        }
+    } )
+} )
+
 export const getMyInvestments = catchAsync( async ( req, res, next ) => {
     const investments = await Investment.find( {user: req.user._id} ).populate( "plan" )
     res.status( 200 ).json( {status: "success", results: investments.length, data: investments} )

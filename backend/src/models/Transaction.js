@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const transactionSchema = new mongoose.Schema( {
     user: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
-    type: {type: String, enum: ["investment", "order", "refund"], required: true},
+    type: {type: String, enum: ["investment", "order", "refund", "withdraw"], required: true},
     reference: String,
     amount: Number,
     relatedInvestment: {type: mongoose.Schema.Types.ObjectId, ref: "Investment"},

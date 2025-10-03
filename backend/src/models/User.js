@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema( {
     role: {type: String, enum: ["user", "admin", "farmer"], default: "user"},
 
     address: String,
-    bankAccount: String,
+    bankAccountNumber: Number,
+    bankName: String,
     verified: {type: Boolean, default: false},
 
     investments: [{type: mongoose.Schema.Types.ObjectId, ref: "Investment"}],
