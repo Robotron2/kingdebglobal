@@ -36,7 +36,7 @@ export const createInvestment = catchAsync( async ( req, res, next ) => {
         roiAmount,
         startDate,
         maturityDate,
-        status: "active",
+        status: "awaiting",
         payoutStatus: "pending",
     } )
 
@@ -120,7 +120,7 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     const totalReturn = roundTo2dp( refundAmount + earnedROI )
 
     // ---------- UPDATE INVESTMENT ----------
-    investment.status = "canceled"
+    investment.status = "cancelled"
     investment.payoutStatus = "pending"
     investment._meta.cancelledBy = userId
     investment._meta.earnedROI = earnedROI
@@ -131,7 +131,8 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     // ---------- UPDATE EXISTING TRANSACTION ----------
     const tx = await Transaction.findOne( {relatedInvestment: investment._id} )
     if ( tx ) {
-        tx.status = "cancel"
+        tx.type = "refund"
+        tx.status = "pending"
         tx.amount = totalReturn
         tx.description = `Refund from cancelling investment in ${ plan.name } plan (Penalty: ${ penalty })`
         await tx.save()
@@ -139,8 +140,8 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
         // fallback safety: if no transaction found, create one
         await Transaction.create( {
             user: userId,
-            type: "investment",
-            status: "cancel",
+            type: "refund",
+            status: "pending",
             amount: totalReturn,
             relatedInvestment: investment._id,
             description: `Refund from cancelling investment in ${ plan.name } plan (Penalty: ${ penalty })`,
@@ -156,8 +157,6 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
         totalReturn,
     } )
 } )
-
-
 
 export const getMyInvestments = catchAsync( async ( req, res, next ) => {
     const investments = await Investment.find( {user: req.user._id} ).populate( "plan" )

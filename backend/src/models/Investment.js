@@ -9,12 +9,12 @@ const investmentSchema = new mongoose.Schema( {
     maturityDate: {type: Date, required: true},
     status: {
         type: String,
-        enum: ["active", "completed", "canceled"],
-        default: "active"
+        enum: ["awaiting", "active", "completed", "cancelled"],
+        default: "awaiting"
     },
     payoutStatus: {
         type: String,
-        enum: ["pending", "paid", "dissolved"],
+        enum: ["pending", "paid"],
         default: "pending"
     },
     transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"},
