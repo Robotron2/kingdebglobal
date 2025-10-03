@@ -1,4 +1,4 @@
-import Investment from "../src/models/Investment"
+import Investment from "../src/models/Investment.js"
 export const investmentMaturityChecker = async () => {
     console.log( " Running investment maturity check..." )
 
