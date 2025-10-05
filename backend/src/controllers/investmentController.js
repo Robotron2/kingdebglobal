@@ -4,19 +4,17 @@ import Transaction from "../models/Transaction.js"
 import User from "../models/User.js"
 import ApiError from "../utils/ApiError.js"
 import catchAsync from "../utils/catchAsync.js"
-import {calcROI, calcMaturityDate, roundTo2dp} from "../utils/investmentUtils.js"
+import {calcROI, calcMaturityDate, roundTo2dp, generateInternalReference} from "../utils/investmentUtils.js"
+import {initiatePayment} from "../utils/paystackService.js"
 
 
 export const createInvestment = catchAsync( async ( req, res, next ) => {
     const {planId, amount} = req.body
     const userId = req.user._id
-    if ( !planId || typeof amount !== "number" ) {
-        return next( new ApiError( "planId and numeric amount are required", 400 ) )
-    }
 
     const plan = await InvestmentPlan.findById( planId )
     if ( !plan || !plan.isActive ) {
-        return next( new ApiError( "Invalid or inactive investment plan", 400 ) )
+        return next( new ApiError( 'Invalid or inactive plan', 400 ) )
     }
 
     if ( amount < plan.minAmount || amount > plan.maxAmount ) {
@@ -28,7 +26,9 @@ export const createInvestment = catchAsync( async ( req, res, next ) => {
     const roiAmount = roundTo2dp( calcROI( amount, plan.roiPercentage ) )
     const startDate = new Date()
     const maturityDate = calcMaturityDate( startDate, plan.durationInDays )
+    const kingDebRef = generateInternalReference() // "KDG - XXXXXX"
 
+    // 1. Create investment (status = awaiting)
     const investment = await Investment.create( {
         user: userId,
         plan: plan._id,
@@ -36,22 +36,39 @@ export const createInvestment = catchAsync( async ( req, res, next ) => {
         roiAmount,
         startDate,
         maturityDate,
-        status: "awaiting",
-        payoutStatus: "pending",
+        status: 'awaiting',
     } )
 
-    // Create transaction placeholder (pending) for payment tracking
+    // 2. Create transaction
     await Transaction.create( {
         user: userId,
-        type: "investment",
-        reference: `INV-${ Date.now() }`, // will be replaced by gateway ref later
+        type: 'investment',
+        kingDebRef,
         amount,
         relatedInvestment: investment._id,
-        status: "pending",
-        paymentGateway: "paystack",
+        status: 'pending',
+        paymentGateway: 'paystack',
     } )
 
-    return res.status( 201 ).json( {status: "success", data: investment} )
+    // 3. Initiate Paystack payment
+    const user = await User.findById( userId )
+    const metadata = {
+        type: 'investment',
+        planId,
+        userId,
+        kingDebRef,
+    }
+
+    const paystackData = await initiatePayment( user.email, amount * 100, metadata, kingDebRef )
+    console.log( paystackData )
+
+    res.status( 201 ).json( {
+        status: 'success',
+        data: {
+            investment,
+            payment: paystackData,
+        },
+    } )
 } )
 
 export const cancelInvestment = catchAsync( async ( req, res, next ) => {
@@ -76,7 +93,7 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
         return next( new ApiError( "User not found", 404 ) )
     }
 
-    // ---------- DEV / PROD SWITCH ----------
+    // ---------- DEV / PROD SWITCH ----------  
     const dev = process.env.NODE_ENV === "dev"
     const unitMs = dev ? 1000 * 60 : 1000 * 60 * 60 * 24
     const now = Date.now()
