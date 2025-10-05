@@ -6,6 +6,7 @@ import cron from "node-cron"
 import authRoutes from "./routes/authRoutes.js"
 import plansRoutes from "./routes/plansRoute.js"
 import investmentRoutes from "./routes/investmentRoutes.js"
+import webhookRoute from "./routes/webhookRoute.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
 import {investmentMaturityChecker} from "../helpers/investmentHelpers.js"
 
@@ -23,6 +24,7 @@ app.get( "/", ( req, res ) => {
 app.use( "/api/auth", authRoutes )
 app.use( "/api/plans", plansRoutes )
 app.use( "/api/investments", investmentRoutes )
+app.use( "/api/paystack", webhookRoute )
 
 //cron jobs
 cron.schedule( "0 * * * *", investmentMaturityChecker ) //Hourly

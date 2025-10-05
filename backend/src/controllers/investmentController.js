@@ -7,69 +7,69 @@ import catchAsync from "../utils/catchAsync.js"
 import {calcROI, calcMaturityDate, roundTo2dp, generateInternalReference} from "../utils/investmentUtils.js"
 import {initiatePayment} from "../utils/paystackService.js"
 
-
 export const createInvestment = catchAsync( async ( req, res, next ) => {
     const {planId, amount} = req.body
     const userId = req.user._id
 
+    // 1. Validate plan
     const plan = await InvestmentPlan.findById( planId )
-    if ( !plan || !plan.isActive ) {
-        return next( new ApiError( 'Invalid or inactive plan', 400 ) )
-    }
-
+    if ( !plan || !plan.isActive ) return next( new ApiError( "Invalid or inactive plan", 400 ) )
     if ( amount < plan.minAmount || amount > plan.maxAmount ) {
-        return next(
-            new ApiError( `Amount must be between ${ plan.minAmount } and ${ plan.maxAmount }`, 400 )
-        )
+        return next( new ApiError( `Amount must be between ${ plan.minAmount } and ${ plan.maxAmount }`, 400 ) )
     }
 
     const roiAmount = roundTo2dp( calcROI( amount, plan.roiPercentage ) )
     const startDate = new Date()
     const maturityDate = calcMaturityDate( startDate, plan.durationInDays )
-    const kingDebRef = generateInternalReference() // "KDG - XXXXXX"
+    const kingDebRef = generateInternalReference()
 
-    // 1. Create investment (status = awaiting)
-    const investment = await Investment.create( {
-        user: userId,
-        plan: plan._id,
-        amount,
-        roiAmount,
-        startDate,
-        maturityDate,
-        status: 'awaiting',
-    } )
+    let investment, transaction
 
-    // 2. Create transaction
-    await Transaction.create( {
-        user: userId,
-        type: 'investment',
-        kingDebRef,
-        amount,
-        relatedInvestment: investment._id,
-        status: 'pending',
-        paymentGateway: 'paystack',
-    } )
+    try {
+        // 2. Create investment
+        investment = await Investment.create( {
+            user: userId,
+            plan: plan._id,
+            amount,
+            roiAmount,
+            startDate,
+            maturityDate,
+            status: "awaiting",
+        } )
 
-    // 3. Initiate Paystack payment
-    const user = await User.findById( userId )
-    const metadata = {
-        type: 'investment',
-        planId,
-        userId,
-        kingDebRef,
+        // 3. Create transaction
+        transaction = await Transaction.create( {
+            user: userId,
+            type: "investment",
+            kingDebRef,
+            amount,
+            relatedInvestment: investment._id,
+            status: "pending",
+            paymentGateway: "paystack",
+        } )
+
+        // 4. Initiate Paystack payment
+        const user = await User.findById( userId )
+        const metadata = {type: "investment", planId, userId, kingDebRef}
+        const paystackData = await initiatePayment( user.email, amount * 100, metadata, kingDebRef )
+
+        // 5. Return if Paystack succeeds
+        return res.status( 201 ).json( {
+            status: "success",
+            data: {
+                investment,
+                payment: paystackData,
+            },
+        } )
+    } catch ( err ) {
+        // Clean up investment & transaction if Paystack failed
+        if ( transaction?._id ) await Transaction.findByIdAndDelete( transaction._id )
+        if ( investment?._id ) await Investment.findByIdAndDelete( investment._id )
+
+        return next( err )
     }
-
-    const paystackData = await initiatePayment( user.email, amount * 100, metadata, kingDebRef )
-    console.log( paystackData )
-
-    res.status( 201 ).json( {
-        status: 'success',
-        data: {
-            investment,
-            payment: paystackData,
-        },
-    } )
 } )
+
 
 export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     const {investmentId} = req.params

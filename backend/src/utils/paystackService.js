@@ -1,4 +1,5 @@
 import axios from "axios"
+import crypto from "crypto"
 import ApiError from "./ApiError.js"
 
 
@@ -47,4 +48,11 @@ export const initiatePayment = async ( email, amount, metadata = null, kingDebRe
             throw new ApiError( error.message || 'Unexpected payment error', 500 )
         }
     }
+}
+
+
+export const verifyPaystackSignature = ( req ) => {
+    const signature = req.headers["x-paystack-signature"]
+    const hash = crypto.createHmac( "sha512", PAYSTACK_SECRET_KEY ).update( JSON.stringify( req.body ) ).digest( "hex" )
+    return signature === hash
 }
