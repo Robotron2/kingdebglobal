@@ -15,4 +15,14 @@ export const calcMaturityDate = ( startDate, durationInDays, opts = {} ) => {
     return date
 }
 
+export const generateInternalReference = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let code = ""
+    for ( let i = 0;i < 6;i++ ) {
+        code += chars.charAt( Math.floor( Math.random() * chars.length ) )
+    }
+    return `KDG - ${ code }`
+}
+
+
 export const roundTo2dp = ( num ) => Math.round( ( num + Number.EPSILON ) * 100 ) / 100

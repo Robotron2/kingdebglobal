@@ -1,5 +1,5 @@
 import express from "express"
-import {cancelInvestment, createInvestment, getMyInvestments, } from "../controllers/investmentController.js"
+import {cancelInvestment, createInvestment, getMyInvestments, requestWithdrawal, } from "../controllers/investmentController.js"
 import {protect} from "../middlewares/protectRoute.js"
 
 const router = express.Router()
@@ -8,6 +8,7 @@ const router = express.Router()
 router.use( protect )
 router.post( "/", createInvestment )
 router.get( "/", getMyInvestments )
+router.post( "/:investmentId/withdraw", requestWithdrawal )
 router.patch( "/:investmentId/cancel", cancelInvestment )
 
 // Restricted: Admin only

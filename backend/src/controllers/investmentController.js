@@ -4,54 +4,70 @@ import Transaction from "../models/Transaction.js"
 import User from "../models/User.js"
 import ApiError from "../utils/ApiError.js"
 import catchAsync from "../utils/catchAsync.js"
-import {calcROI, calcMaturityDate, roundTo2dp} from "../utils/investmentUtils.js"
-
+import {calcROI, calcMaturityDate, roundTo2dp, generateInternalReference} from "../utils/investmentUtils.js"
+import {initiatePayment} from "../utils/paystackService.js"
 
 export const createInvestment = catchAsync( async ( req, res, next ) => {
     const {planId, amount} = req.body
     const userId = req.user._id
-    if ( !planId || typeof amount !== "number" ) {
-        return next( new ApiError( "planId and numeric amount are required", 400 ) )
-    }
 
+    // 1. Validate plan
     const plan = await InvestmentPlan.findById( planId )
-    if ( !plan || !plan.isActive ) {
-        return next( new ApiError( "Invalid or inactive investment plan", 400 ) )
-    }
-
+    if ( !plan || !plan.isActive ) return next( new ApiError( "Invalid or inactive plan", 400 ) )
     if ( amount < plan.minAmount || amount > plan.maxAmount ) {
-        return next(
-            new ApiError( `Amount must be between ${ plan.minAmount } and ${ plan.maxAmount }`, 400 )
-        )
+        return next( new ApiError( `Amount must be between ${ plan.minAmount } and ${ plan.maxAmount }`, 400 ) )
     }
 
     const roiAmount = roundTo2dp( calcROI( amount, plan.roiPercentage ) )
     const startDate = new Date()
     const maturityDate = calcMaturityDate( startDate, plan.durationInDays )
+    const kingDebRef = generateInternalReference()
 
-    const investment = await Investment.create( {
-        user: userId,
-        plan: plan._id,
-        amount,
-        roiAmount,
-        startDate,
-        maturityDate,
-        status: "active",
-        payoutStatus: "pending",
-    } )
+    let investment, transaction
 
-    // Create transaction placeholder (pending) for payment tracking
-    await Transaction.create( {
-        user: userId,
-        type: "investment",
-        reference: `INV-${ Date.now() }`, // will be replaced by gateway ref later
-        amount,
-        relatedInvestment: investment._id,
-        status: "pending",
-        paymentGateway: "paystack",
-    } )
+    try {
+        // 2. Create investment
+        investment = await Investment.create( {
+            user: userId,
+            plan: plan._id,
+            amount,
+            roiAmount,
+            startDate,
+            maturityDate,
+            status: "awaiting",
+        } )
 
-    return res.status( 201 ).json( {status: "success", data: investment} )
+        // 3. Create transaction
+        transaction = await Transaction.create( {
+            user: userId,
+            type: "investment",
+            kingDebRef,
+            amount,
+            relatedInvestment: investment._id,
+            status: "pending",
+            paymentGateway: "paystack",
+        } )
+
+        // 4. Initiate Paystack payment
+        const user = await User.findById( userId )
+        const metadata = {type: "investment", planId, userId, kingDebRef}
+        const paystackData = await initiatePayment( user.email, amount * 100, metadata, kingDebRef )
+
+        // 5. Return if Paystack succeeds
+        return res.status( 201 ).json( {
+            status: "success",
+            data: {
+                investment,
+                payment: paystackData,
+            },
+        } )
+    } catch ( err ) {
+        // Clean up investment & transaction if Paystack failed
+        if ( transaction?._id ) await Transaction.findByIdAndDelete( transaction._id )
+        if ( investment?._id ) await Investment.findByIdAndDelete( investment._id )
+
+        return next( err )
+    }
 } )
 
 export const cancelInvestment = catchAsync( async ( req, res, next ) => {
@@ -76,7 +92,7 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
         return next( new ApiError( "User not found", 404 ) )
     }
 
-    // ---------- DEV / PROD SWITCH ----------
+    // ---------- DEV / PROD SWITCH ----------  
     const dev = process.env.NODE_ENV === "dev"
     const unitMs = dev ? 1000 * 60 : 1000 * 60 * 60 * 24
     const now = Date.now()
@@ -120,7 +136,7 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     const totalReturn = roundTo2dp( refundAmount + earnedROI )
 
     // ---------- UPDATE INVESTMENT ----------
-    investment.status = "canceled"
+    investment.status = "cancelled"
     investment.payoutStatus = "pending"
     investment._meta.cancelledBy = userId
     investment._meta.earnedROI = earnedROI
@@ -131,7 +147,8 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     // ---------- UPDATE EXISTING TRANSACTION ----------
     const tx = await Transaction.findOne( {relatedInvestment: investment._id} )
     if ( tx ) {
-        tx.status = "cancel"
+        tx.type = "refund"
+        tx.status = "pending"
         tx.amount = totalReturn
         tx.description = `Refund from cancelling investment in ${ plan.name } plan (Penalty: ${ penalty })`
         await tx.save()
@@ -139,8 +156,8 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
         // fallback safety: if no transaction found, create one
         await Transaction.create( {
             user: userId,
-            type: "investment",
-            status: "cancel",
+            type: "refund",
+            status: "pending",
             amount: totalReturn,
             relatedInvestment: investment._id,
             description: `Refund from cancelling investment in ${ plan.name } plan (Penalty: ${ penalty })`,
@@ -157,7 +174,54 @@ export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     } )
 } )
 
+export const requestWithdrawal = catchAsync( async ( req, res, next ) => {
+    const {investmentId} = req.params
+    const userId = req.user._id
 
+    // 1. Validate investment
+    const investment = await Investment.findById( investmentId )
+    if ( !investment ) return next( new ApiError( "Investment not found", 404 ) )
+    if ( !investment.user.equals( userId ) ) return next( new ApiError( "Not your investment", 403 ) )
+    if ( investment.status !== "completed" ) {
+        return next( new ApiError( "Investment has not matured yet", 400 ) )
+    }
+    if ( investment.payoutStatus === "paid" ) {
+        return next( new ApiError( "Investment already withdrawn", 400 ) )
+    }
+    const user = await User.findById( userId )
+    if ( !user.bankAccountNumber && !bankName ) return next( new ApiError( "Please provide valid bank details", 400 ) )
+
+    // total payout (principal + ROI)
+    const totalPayout = investment.amount + investment.roiAmount
+
+    // 2. Create transaction record
+    const tx = await Transaction.create( {
+        user: userId,
+        type: "withdrawal",
+        amount: totalPayout,
+        relatedInvestment: investment._id,
+        status: "pending",
+        description: `Withdrawal for matured investment in plan ${ investment.plan }`
+    } )
+
+    // 3. Na here we go run Paystack Transfer. 
+
+    //On success, else, you know what to do fam
+    tx.status = "successful"
+    investment.payoutStatus = "paid"
+    await tx.save()
+    await investment.save()
+
+    //return something give your users chop
+    return res.status( 200 ).json( {
+        success: true,
+        message: "Withdrawal request processed",
+        data: {
+            transaction: tx,
+            investment
+        }
+    } )
+} )
 
 export const getMyInvestments = catchAsync( async ( req, res, next ) => {
     const investments = await Investment.find( {user: req.user._id} ).populate( "plan" )

@@ -1,11 +1,14 @@
-import express from "express"
 import cors from "cors"
-import morgan from "morgan"
 import dotenv from "dotenv"
+import express from "express"
+import morgan from "morgan"
+import cron from "node-cron"
 import authRoutes from "./routes/authRoutes.js"
 import plansRoutes from "./routes/plansRoute.js"
 import investmentRoutes from "./routes/investmentRoutes.js"
+import webhookRoute from "./routes/webhookRoute.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
+import {investmentMaturityChecker} from "../helpers/investmentHelpers.js"
 
 dotenv.config()
 
@@ -21,8 +24,10 @@ app.get( "/", ( req, res ) => {
 app.use( "/api/auth", authRoutes )
 app.use( "/api/plans", plansRoutes )
 app.use( "/api/investments", investmentRoutes )
+app.use( "/api/paystack", webhookRoute )
 
-
+//cron jobs
+cron.schedule( "0 * * * *", investmentMaturityChecker ) //Hourly
 
 
 
