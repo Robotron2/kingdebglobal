@@ -70,7 +70,6 @@ export const createInvestment = catchAsync( async ( req, res, next ) => {
     }
 } )
 
-
 export const cancelInvestment = catchAsync( async ( req, res, next ) => {
     const {investmentId} = req.params
     const userId = req.user._id
