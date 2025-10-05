@@ -1,4 +1,5 @@
 import Investment from "../src/models/Investment.js"
+import {sendBatchMatureEmails} from "../src/utils/mailer.js"
 export const investmentMaturityChecker = async () => {
     console.log( " Running investment maturity check..." )
 
