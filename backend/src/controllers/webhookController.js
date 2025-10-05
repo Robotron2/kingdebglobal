@@ -7,77 +7,109 @@ export const paystackWebhook = catchAsync( async ( req, res, next ) => {
     // 1. Verify Signature
     const isValid = verifyPaystackSignature( req )
     if ( !isValid ) {
-        console.warn( "Invalid Paystack signature" )
+        console.warn( " Invalid Paystack signature" )
         return res.status( 400 ).json( {success: false, message: "Invalid signature"} )
     }
 
     const event = req.body
     const {reference, status, metadata} = event.data
+    const eventType = event.event
 
-    console.log( `📬 Paystack Webhook: ${ event.event } | Ref: ${ reference } | Status: ${ status }` )
+    console.log( ` Paystack Webhook Received: ${ eventType } | Ref: ${ reference } | Status: ${ status }` )
 
-    // 2. Locate Transaction
-    const tx = await Transaction.findOne( {kingDebRef: metadata?.kingDebRef} )
-    if ( !tx ) {
-        console.warn( `No transaction found for reference: ${ reference }` )
-        return res.status( 200 ).json( {success: true} ) // avoid retry flood
-    }
+    // Defensive: metadata might not exist (e.g. some transfer events)
+    const txType = metadata?.type
 
-    // 3. Locate Investment (if any)
-    const investment = tx.relatedInvestment
-        ? await Investment.findById( tx.relatedInvestment )
-        : null
-
-    // 4. Switch based on event type
-    switch ( event.event ) {
+    // 2. Route by event type
+    switch ( eventType ) {
         case "charge.success": {
-            // Handle successful investment payment
-            if ( status === "success" || status === "successful" ) {
-                tx.status = "successful"
-                tx.paystackRef = reference
-                await tx.save()
+            if ( !txType ) {
+                console.warn( ` No metadata.type found for ${ reference }, skipping` )
+                break
+            }
 
-                if ( investment && investment.status === "awaiting" ) {
-                    investment.status = "active"
-                    await investment.save()
-                    console.log( `✅ Investment ${ investment._id } activated` )
+            // Find the transaction using internal reference stored in metadata
+            const tx = await Transaction.findOne( {kingDebRef: metadata.kingDebRef} )
+            if ( !tx ) {
+                console.warn( ` No transaction found for reference: ${ reference }` )
+                // Always respond 200 to avoid Paystack retries
+                break
+            }
+
+            // Duplicate webhook check
+            if ( tx.status === "successful" ) {
+                console.log( ` Duplicate charge.success webhook for ${ reference }, ignoring.` )
+                break
+            }
+
+            switch ( txType ) {
+                case "investment": {
+                    tx.status = "successful"
+                    tx.paystackRef = reference
+                    await tx.save()
+
+                    const investment = tx.relatedInvestment
+                        ? await Investment.findById( tx.relatedInvestment )
+                        : null
+
+                    if ( investment && investment.status === "awaiting" ) {
+                        investment.status = "active"
+                        await investment.save()
+                        console.log( ` Investment ${ investment._id } activated` )
+                    }
+                    break
                 }
+
+                case "ecommerce": {
+                    //  Future e-commerce logic goes here
+                    // mark order as paid, send confirmation email, etc.
+                    tx.status = "successful"
+                    tx.paystackRef = reference
+                    await tx.save()
+
+                    console.log( ` E-commerce payment successful for tx ${ tx._id }` )
+                    break
+                }
+
+                default:
+                    console.warn( ` Unknown txType '${ txType }' for ${ reference }` )
+            }
+
+            break
+        }
+
+        case "charge.failed":
+        case "charge.abandoned": {
+            // Handle failed payments
+            const tx = metadata?.kingDebRef
+                ? await Transaction.findOne( {kingDebRef: metadata.kingDebRef} )
+                : null
+
+            if ( tx ) {
+                tx.status = "failed"
+                await tx.save()
+                console.log( ` Payment failed for transaction ${ tx._id }` )
             }
             break
         }
 
-        case "charge.failed": {
-            tx.status = "failed"
-            await tx.save()
-            if ( investment && investment.status === "awaiting" ) {
-                investment.status = "cancelled"
-                await investment.save()
-            }
-            console.log( `Charge failed for ${ tx._id }` )
-            break
-        }
-
-        case "transfer.success": {
-            // Handle successful transfer events if you ever do payouts
+        case "transfer.success":
+            // Handle transfers (e.g. withdrawals, payouts)
             console.log( ` Transfer succeeded for ${ reference }` )
-
             break
-        }
 
-        case "transfer.failed": {
+        case "transfer.failed":
             console.log( ` Transfer failed for ${ reference }` )
             break
-        }
 
-        default: {
-            console.log( `Unhandled Paystack event type: ${ event.event }` )
-            break
-        }
+        default:
+            console.log( `ℹ Unhandled Paystack event type: ${ eventType }` )
     }
 
-    //back to paystack
+    // 3. Always respond 200 to acknowledge receipt to Paystack
     return res.status( 200 ).json( {success: true} )
 } )
+
 
 
 // {
