@@ -15,9 +15,7 @@ export const register = catchAsync( async ( req, res, next ) => {
     const hashedPassword = await hashPassword( password )
     const user = await User.create( {fullName, email, password: hashedPassword} )
 
-    const emailSent = await sendRegisterEmail( email )
-
-    return res.status( 201 ).json( {
+    res.status( 201 ).json( {
         success: true,
         token: generateToken( user._id ),
         user: {
@@ -25,6 +23,9 @@ export const register = catchAsync( async ( req, res, next ) => {
             fullName: user.fullName,
             email: user.email,
         },
+    } )
+    sendRegisterEmail( email, fullName ).catch( ( err ) => {
+        console.error( `Failed to send registration email to ${ email }`, err )
     } )
 } )
 

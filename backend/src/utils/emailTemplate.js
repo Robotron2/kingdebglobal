@@ -60,7 +60,7 @@ export const generateEmailTemplate = ( {
           padding: 25px;
           text-align: center;
         }
-        h1 {
+        h1, h2 {
           font-size: 22px;
           margin-bottom: 10px;
         }
@@ -69,18 +69,22 @@ export const generateEmailTemplate = ( {
           color: #333;
           line-height: 1.5;
         }
-        button {
+        .button-link {
+          display: inline-block;
           margin-top: 20px;
           background: ${ buttonBg };
-          color: #fff;
+          color: #ffffff !important;
           padding: 12px 24px;
-          border: none;
           border-radius: 8px;
-          cursor: pointer;
+          text-decoration: none !important;
           font-size: 15px;
           font-weight: bold;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        button:hover {
+        .button-link:visited {
+          color: #ffffff !important;
+        }
+        .button-link:hover {
           opacity: 0.9;
         }
         .footer {
@@ -100,9 +104,7 @@ export const generateEmailTemplate = ( {
         <div class="content">
           <p>${ message }</p>
           ${ buttonText && buttonLink
-            ? `<form action="${ buttonLink }" method="GET" target="_blank">
-                   <button type="submit">${ buttonText }</button>
-                 </form>`
+            ? `<a href="${ buttonLink }" target="_blank" class="button-link">${ buttonText }</a>`
             : ""
         }
         </div>
