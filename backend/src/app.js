@@ -4,8 +4,9 @@ import express from "express"
 import morgan from "morgan"
 import cron from "node-cron"
 import authRoutes from "./routes/authRoutes.js"
-import plansRoutes from "./routes/plansRoute.js"
 import investmentRoutes from "./routes/investmentRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
+import plansRoutes from "./routes/plansRoute.js"
 import webhookRoute from "./routes/webhookRoute.js"
 import {errorHandler} from "./middlewares/errorHandler.js"
 import {investmentMaturityChecker} from "../helpers/investmentHelpers.js"
@@ -25,6 +26,7 @@ app.use( "/api/auth", authRoutes )
 app.use( "/api/plans", plansRoutes )
 app.use( "/api/investments", investmentRoutes )
 app.use( "/api/paystack", webhookRoute )
+app.use( "/api/user", userRoutes )
 
 //cron jobs
 cron.schedule( "0 * * * *", investmentMaturityChecker ) //Hourly
