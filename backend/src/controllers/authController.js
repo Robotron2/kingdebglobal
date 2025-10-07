@@ -4,7 +4,7 @@ import ApiError from "../utils/ApiError.js"
 import generateToken from "../utils/generateToken.js"
 import {comparePassword, hashPassword} from "../utils/bcryptUtils.js"
 import Token from "../models/Token.js"
-import {forgotPasswordMailer} from "../utils/mailer.js"
+import {forgotPasswordMailer, sendRegisterEmail} from "../utils/mailer.js"
 
 export const register = catchAsync( async ( req, res, next ) => {
     const {fullName, email, password} = req.body
@@ -14,6 +14,8 @@ export const register = catchAsync( async ( req, res, next ) => {
 
     const hashedPassword = await hashPassword( password )
     const user = await User.create( {fullName, email, password: hashedPassword} )
+
+    const emailSent = await sendRegisterEmail( email )
 
     return res.status( 201 ).json( {
         success: true,

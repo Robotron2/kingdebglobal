@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 dotenv.config()
 import nodemailer from "nodemailer"
+import {generateEmailTemplate} from "./emailTemplate.js"
 
 const host = process.env.SMTP_HOST
 const port = process.env.SMTP_PORT
@@ -20,23 +21,38 @@ const transporter = nodemailer.createTransport( {
 } )
 
 export const forgotPasswordMailer = async ( userMail, token ) => {
+    const html = generateEmailTemplate( {
+        title: "Password Reset OTP",
+        message: `Your one-time password (OTP) for password reset is <strong>${ token }</strong>. It expires in 15 minutes.`,
+    } )
     try {
         await transporter.sendMail( {
             from: contactEmail,
             to: userMail,
             subject: "Kingdebglobal - Password Reset",
-            html: `
-        <html>
-          <body>
-            <h4>
-              Your one-time password (OTP) for password reset is:
-              <strong>${ token }</strong>.
-              OTP expires in 15 minutes.
-            </h4>
-          </body>
-        </html>
-      `,
+            html,
         } )
+        return true
+    } catch ( error ) {
+        console.error( "Mailer error:", error )
+        return false
+    }
+}
+export const sendRegisterEmail = async ( userMail ) => {
+    const html = generateEmailTemplate( {
+        title: "Welcome to my App",
+        message: `You're welcome to my pineapple farm. Here you can buy pineapples, buy suckers even make investments for up to 2 years. Flexible & pocket friendly.`,
+        buttonText: "My github",
+        buttonLink: "https://github.com/robotron2",
+    } )
+    try {
+        await transporter.sendMail( {
+            from: contactEmail,
+            to: userMail,
+            subject: "PineappleApp - Welcom",
+            html,
+        } )
+        console.log( `Welcome email sent on successful registration` )
         return true
     } catch ( error ) {
         console.error( "Mailer error:", error )
