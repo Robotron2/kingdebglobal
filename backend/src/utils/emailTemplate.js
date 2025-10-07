@@ -4,7 +4,29 @@ export const generateEmailTemplate = ( {
     message,
     buttonText,
     buttonLink,
+    variant = "info",
 } ) => {
+    const variants = {
+        success: {
+            headerBg: "#4caf50",
+            buttonBg: "#4caf50",
+        },
+        warning: {
+            headerBg: "#ff9800",
+            buttonBg: "#ff9800",
+        },
+        error: {
+            headerBg: "#f44336",
+            buttonBg: "#f44336",
+        },
+        info: {
+            headerBg: "#2196f3",
+            buttonBg: "#2196f3",
+        },
+    }
+
+    const {headerBg, buttonBg} = variants[variant] || variants.info
+
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -22,14 +44,14 @@ export const generateEmailTemplate = ( {
         .container {
           max-width: 600px;
           margin: 30px auto;
-          background: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(10px);
           border-radius: 20px;
           overflow: hidden;
           box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .header {
-          background: #4caf50;
+          background: ${ headerBg };
           color: white;
           text-align: center;
           padding: 20px;
@@ -47,15 +69,19 @@ export const generateEmailTemplate = ( {
           color: #333;
           line-height: 1.5;
         }
-        .button {
-          display: inline-block;
+        button {
           margin-top: 20px;
-          background: #ffb347;
+          background: ${ buttonBg };
           color: #fff;
-          text-decoration: none;
-          padding: 12px 20px;
+          padding: 12px 24px;
+          border: none;
           border-radius: 8px;
+          cursor: pointer;
+          font-size: 15px;
           font-weight: bold;
+        }
+        button:hover {
+          opacity: 0.9;
         }
         .footer {
           font-size: 12px;
@@ -73,7 +99,12 @@ export const generateEmailTemplate = ( {
         </div>
         <div class="content">
           <p>${ message }</p>
-          ${ buttonText && buttonLink ? `<a href="${ buttonLink }" class="button">${ buttonText }</a>` : "" }
+          ${ buttonText && buttonLink
+            ? `<form action="${ buttonLink }" method="GET" target="_blank">
+                   <button type="submit">${ buttonText }</button>
+                 </form>`
+            : ""
+        }
         </div>
         <div class="footer">
           <p>&copy; ${ new Date().getFullYear() } Pineapple Farm. All rights reserved.</p>
