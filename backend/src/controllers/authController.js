@@ -60,7 +60,8 @@ export const verifyEmail = catchAsync( async ( req, res, next ) => {
 
     return res.status( 200 ).json( {
         success: true,
-        message: "User verified successfully!"
+        message: "User verified successfully!",
+        token: generateToken( user._id ),
     } )
 } )
 
