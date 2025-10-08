@@ -49,6 +49,22 @@ export const login = catchAsync( async ( req, res, next ) => {
     } )
 } )
 
+export const verifyEmail = catchAsync( async ( req, res, next ) => {
+    const {email} = req.query
+
+    const user = await User.findOne( {email} ).select( "-password" )
+    if ( !user ) return next( new ApiError( "User not found, kindly register", 401 ) )
+
+    user.verified = true
+    await user.save()
+
+    return res.status( 200 ).json( {
+        success: true,
+        message: "User verified successfully!",
+        token: generateToken( user._id ),
+    } )
+} )
+
 export const sendResetOTP = catchAsync( async ( req, res, next ) => {
     const {email} = req.body
     if ( !email ) return next( new ApiError( "Provide a valid email address", 400 ) )

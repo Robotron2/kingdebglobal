@@ -1,4 +1,3 @@
-// utils/emailTemplate.js
 export const generateEmailTemplate = ( {
     title,
     message,
@@ -54,10 +53,10 @@ export const generateEmailTemplate = ( {
           background: ${ headerBg };
           color: white;
           text-align: center;
-          padding: 20px;
+          padding: 15px 20px;
         }
         .content {
-          padding: 25px;
+          padding: 20px;
           text-align: center;
         }
         h1, h2 {
@@ -66,7 +65,7 @@ export const generateEmailTemplate = ( {
         }
         p {
           font-size: 16px;
-          color: #333;
+          color: #333333;
           line-height: 1.5;
         }
         .button-link {
@@ -89,9 +88,9 @@ export const generateEmailTemplate = ( {
         }
         .footer {
           font-size: 12px;
-          color: #777;
+          color: #777777;
           text-align: center;
-          padding: 15px;
+          padding: 10px 15px;
           background: #f7f7f7;
         }
       </style>
@@ -115,4 +114,4 @@ export const generateEmailTemplate = ( {
     </body>
     </html>
     `
-};
+}
