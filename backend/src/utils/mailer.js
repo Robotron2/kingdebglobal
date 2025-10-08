@@ -67,7 +67,8 @@ export const forgotPasswordMailer = async ( userMail, token ) => {
 //     }
 // }
 export const sendRegisterEmail = async ( email, name = "" ) => {
-    const title = `Welcome to KingDeb Farm${ name ? `, ${ name }` : "" }!`
+    const title = `Welcome to Pineapple Farm${ name ? `, ${ name }` : "" }!`
+    // const title = `Welcome to KingDeb Farm${ name ? `, ${ name }` : "" }!`
     const message = `
       We're excited to have you on board. Start exploring investments and opportunities with us.
       Please verify your email to activate your account.
@@ -77,7 +78,7 @@ export const sendRegisterEmail = async ( email, name = "" ) => {
         title,
         message,
         buttonText: "Verify Email",
-        buttonLink: `${ process.env.FRONTEND_URL }/verify?email=${ email }`,
+        buttonLink: `${ process.env.FRONTEND_URL }/api/auth/verify?email=${ email }`,
         variant: "success"
     } )
 
