@@ -1,23 +1,55 @@
 import mongoose from "mongoose"
 
-const orderSchema = new mongoose.Schema( {
-    user: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
-    products: [
-        {
-            product: {type: mongoose.Schema.Types.ObjectId, ref: "Product"},
-            quantity: {type: Number, required: true},
-            price: {type: Number, required: true}
-        }
-    ],
-    totalAmount: {type: Number, required: true},
-    status: {
-        type: String,
-        enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
-        default: "pending"
-    },
-    transaction: {type: mongoose.Schema.Types.ObjectId, ref: "Transaction"},
-    paymentMethod: {type: String, enum: ["paystack", "card", "bank_transfer", "wallet"], required: true},
-    createdAt: {type: Date, default: Date.now}
-} )
+const orderItemSchema = new mongoose.Schema(
+	{
+		product: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Product",
+			required: true,
+		},
+		quantity: {
+			type: Number,
+			required: true,
+			min: [1, "Quantity cannot be less than 1"],
+		},
+		priceAtPurchase: {
+			type: Number,
+			required: true,
+		},
+	},
+	{ _id: false }
+)
 
-export default mongoose.model( "Order", orderSchema )
+const orderSchema = new mongoose.Schema(
+	{
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
+		items: [orderItemSchema],
+		totalAmount: {
+			type: Number,
+			required: true,
+		},
+		status: {
+			type: String,
+			enum: ["pending", "paid", "shipped", "delivered", "cancelled"],
+			default: "pending",
+		},
+		shippingAddress: {
+			fullName: { type: String },
+			address: { type: String },
+			city: { type: String },
+			state: { type: String },
+			country: { type: String },
+			postalCode: { type: String },
+		},
+		paymentMethod: { type: String, enum: ["paystack", "card", "bank_transfer", "wallet"], required: true },
+		paidAt: Date,
+		deliveredAt: Date,
+	},
+	{ timestamps: true }
+)
+
+export default mongoose.model("Order", orderSchema)
