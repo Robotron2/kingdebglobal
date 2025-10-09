@@ -206,10 +206,9 @@ export const requestWithdrawal = catchAsync( async ( req, res, next ) => {
 
     // 3. Na here we go run Paystack Transfer. 
 
-    //On success, else, you know what to do fam
-    tx.status = "successful"
-    investment.payoutStatus = "paid"
-    await tx.save()
+    //On success, you know what to do fam
+    investment.status = "completed"
+    investment.payoutStatus = "pending"
     await investment.save()
 
     //return something give your users chop
