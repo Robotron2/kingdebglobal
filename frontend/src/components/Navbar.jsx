@@ -4,9 +4,23 @@ import { useTheme } from "../hooks/useTheme"
 const THEMES = ["light", "dark", "system"]
 
 const Navbar = () => {
+	const [isScrolled, setIsScrolled] = useState(false)
 	const { theme, setTheme } = useTheme()
 	const [open, setOpen] = useState(false)
 	const dropdownRef = useRef(null)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 10) {
+				setIsScrolled(true)
+			} else {
+				setIsScrolled(false)
+			}
+		}
+
+		window.addEventListener("scroll", handleScroll)
+		return () => window.removeEventListener("scroll", handleScroll)
+	}, [])
 
 	useEffect(() => {
 		function handleClickOutside(event) {
@@ -25,7 +39,12 @@ const Navbar = () => {
 	}
 
 	return (
-		<header className="sticky top-0 z-50 py-2 shadow-sm glass">
+		<header
+			className={`sticky top-0 z-50 py-2 shadow-sm transition-all ease-in-out duration-300 ${
+				isScrolled
+					? "glass backdrop-blur-md bg-opacity-60 text-primary-content"
+					: "bg-primary text-primary-content"
+			}`}>
 			<div className="container">
 				<div className="navbar px-0 ">
 					{/* Left Section */}

@@ -1,18 +1,25 @@
 import "bootstrap-icons/font/bootstrap-icons.css"
-import Navbar from "./components/Navbar"
-import { ThemeProvider } from "./context/ThemeProvider"
-import Footer from "./components/Footer"
+import { useEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
+import Home from "./pages/Home"
+
+const ScrollToTop = () => {
+	const { pathname } = useLocation()
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [pathname])
+
+	return null
+}
 
 const App = () => {
 	return (
 		<>
-			<ThemeProvider>
-				<Navbar />
-				<div className="container">
-					<h1 className="text-3xl font-bold underline">Hello world!</h1>
-				</div>
-				<Footer />
-			</ThemeProvider>
+			{/* <ScrollToTop /> */}
+			<Routes>
+				<Route path="/" element={<Home />} />
+			</Routes>
 		</>
 	)
 }
