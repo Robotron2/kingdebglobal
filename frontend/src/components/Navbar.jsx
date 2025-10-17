@@ -34,7 +34,7 @@ const Navbar = () => {
 							<label
 								tabIndex={0}
 								role="button"
-								className="btn btn-circle text-white btn-primary bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none lg:hidden mr-1 p-0">
+								className="btn btn-circle text-white bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none lg:hidden mr-1 p-0">
 								<i className="bi bi-list text-2xl font-bold"></i>
 							</label>
 
