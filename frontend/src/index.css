@@ -14,6 +14,20 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+@theme {
+    --color-primary-muted: green;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    --color-primary-muted: red;
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    --color-primary-muted: blue;
+}
+
 .poppins-thin {
     font-family: "Poppins", sans-serif;
     font-weight: 100;

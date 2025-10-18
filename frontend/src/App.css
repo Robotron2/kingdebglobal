@@ -1,0 +1,18 @@
+/* Target DaisyUI light theme and soften the base background */
+:root[data-theme="light"] {
+    /* --base-100: #EAF6F4; */
+    --base-100: #EEEDEB;
+
+    --base-200: #EAF6F6;
+    --base-300: #E4E3E1;
+    --base-content: #1E293B;
+}
+
+
+html[data-theme="light"] {
+    background-color: var(--base-100);
+}
+
+body[data-theme="light"] {
+    background-color: var(--base-100);
+}

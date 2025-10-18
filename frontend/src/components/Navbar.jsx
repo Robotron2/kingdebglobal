@@ -41,10 +41,8 @@ const Navbar = () => {
 	return (
 		<header
 			className={`sticky top-0 z-50 py-0 shadow-sm transition-all ease-in-out duration-300 ${
-				isScrolled
-					? "glass backdrop-blur-xl bg-opacity-60 text-primary-content"
-					: "bg-primary text-primary-content"
-			}`}>
+				isScrolled ? "glass backdrop-blur-xl bg-opacity-60 text-primary" : "bg-primary text-primary-content"
+			} ${(theme === "dark" || theme === "system") && isScrolled ? "text-white" : ""}`}>
 			<div className="container py-0">
 				<div className="navbar py-0">
 					{/* Left Section */}
@@ -53,13 +51,15 @@ const Navbar = () => {
 							<label
 								tabIndex={0}
 								role="button"
-								className="btn btn-circle text-white bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none lg:hidden mr-1 p-0">
+								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none lg:hidden mr-1 p-0">
 								<i className="bi bi-list text-2xl font-bold"></i>
 							</label>
 
 							<ul
 								tabIndex="-1"
-								className="menu menu-md dropdown-content bg-base-200 rounded-box z-1 mt-1 w-52 p-2 shadow">
+								className={`menu menu-md dropdown-content bg-base-100 rounded-box z-1 font-semibold mt-1 w-52 p-2 shadow ${
+									theme === "dark" || theme === "system" ? "text-white" : " text-primary"
+								}`}>
 								<li>
 									<a href="/about">About</a>
 								</li>
@@ -104,7 +104,7 @@ const Navbar = () => {
 
 							{/* Dropdown */}
 							<div
-								className={`absolute right-0 top-12 bg-base-200 text-base-content rounded-box w-40 p-2 shadow z-50
+								className={`absolute right-0 top-12 bg-base-200  rounded-box w-40 p-2 shadow z-50
 								transition-all duration-300 origin-top-right transform ${
 									open
 										? "opacity-100 scale-100 pointer-events-auto"
@@ -117,14 +117,18 @@ const Navbar = () => {
 												data-set-theme={themeOption}
 												onClick={handleThemeChange}
 												className={`flex items-center gap-2 ${
-													themeOption === theme ? "active font-medium" : ""
-												}`}>
+													theme === "dark" || theme === "system"
+														? "text-white"
+														: "text-primary"
+												} ${themeOption === theme ? "active font-bold" : ""}`}>
 												{themeOption === "light" && <i className="bi bi-sun-fill text-lg"></i>}
 												{themeOption === "dark" && <i className="bi bi-moon-fill text-lg"></i>}
 												{themeOption === "system" && (
 													<i className="bi bi-laptop-fill text-lg"></i>
 												)}
-												{themeOption.charAt(0).toUpperCase() + themeOption.slice(1)}
+												<span className="font-medium">
+													{themeOption.charAt(0).toUpperCase() + themeOption.slice(1)}
+												</span>
 											</button>
 										</li>
 									))}

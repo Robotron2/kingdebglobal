@@ -49,13 +49,13 @@ export function Hero() {
 				/>
 				<div
 					className={`absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 ${
-						theme === "light" ? "to-base-100" : "to-black/80"
+						theme === "light" ? "to-accentLight" : "to-black/80"
 					}`}
 				/>
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 max-w-7xl -mt-8 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+			<div className="relative z-10 max-w-7xl -mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -80,11 +80,11 @@ export function Hero() {
 					</motion.p>
 
 					<motion.div
-						className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+						className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 "
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.3 }}>
-						<button className="btn  bg-accent text-deep hover:bg-accent/90 font-semibold text-lg px-6">
+						<button className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6">
 							Shop Now
 						</button>
 
