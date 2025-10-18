@@ -39,9 +39,11 @@ const Footer = () => {
 								<input
 									type="text"
 									placeholder="username@site.com"
-									className="input input-bordered join-item p-2 outline-none active:outline-none"
+									className="input input-bordered join-item p-2 outline-none active:outline-none text-primary"
 								/>
-								<button className="btn bg-secondary text-white p-1 join-item">Subscribe</button>
+								<button className="btn bg-secondary text-white p-1 join-item outline-none border-none">
+									Subscribe
+								</button>
 							</div>
 						</fieldset>
 					</form>
@@ -51,13 +53,13 @@ const Footer = () => {
 						<p>&copy; 2025 Theophilus, Inc. All rights reserved.</p>
 					</div>
 					<div className="grid grid-flow-col gap-4 py-4">
-						<a href="#" className="link text-secondary">
+						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-twitter text-xl"></i>
 						</a>
-						<a href="#" className="link text-secondary">
+						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-instagram text-xl"></i>
 						</a>
-						<a href="#" className="link text-secondary">
+						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-github text-xl"></i>
 						</a>
 					</div>
