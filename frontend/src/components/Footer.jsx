@@ -1,7 +1,7 @@
-import { useTheme } from "../hooks/useTheme"
+// import { useTheme } from "../hooks/useTheme"
 
 const Footer = () => {
-	const { theme } = useTheme()
+	// const { theme } = useTheme()
 	return (
 		// <>
 		// 	<div

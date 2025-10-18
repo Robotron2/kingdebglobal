@@ -40,13 +40,13 @@ const Navbar = () => {
 
 	return (
 		<header
-			className={`sticky top-0 z-50 py-2 shadow-sm transition-all ease-in-out duration-300 ${
+			className={`sticky top-0 z-50 py-0 shadow-sm transition-all ease-in-out duration-300 ${
 				isScrolled
-					? "glass backdrop-blur-md bg-opacity-60 text-primary-content"
+					? "glass backdrop-blur-xl bg-opacity-60 text-primary-content"
 					: "bg-primary text-primary-content"
 			}`}>
-			<div className="container">
-				<div className="navbar px-0 ">
+			<div className="container py-0">
+				<div className="navbar py-0">
 					{/* Left Section */}
 					<div className="navbar-start">
 						<div className="dropdown">

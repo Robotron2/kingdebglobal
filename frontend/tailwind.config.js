@@ -9,7 +9,7 @@ export default {
 				primary: " #557B3F",
 				secondary: "#66944C",
 				tertiary: "#7CB35C",
-				accent: "#FFD964",
+				accent: "#E3AF32",
 			},
 			container: {
 				center: true,
