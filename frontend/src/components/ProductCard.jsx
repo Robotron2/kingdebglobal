@@ -47,7 +47,7 @@ export function ProductCard({ product }) {
 						<ShoppingCart className="mr-2 h-4 w-4" />
 						Add to Cart
 					</Button> */}
-					<button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+					<button className="w-3/4 mx-auto bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center p-2 rounded-lg">
 						<ShoppingCart className="mr-2 h-4 w-4" />
 						Add to Cart
 					</button>
