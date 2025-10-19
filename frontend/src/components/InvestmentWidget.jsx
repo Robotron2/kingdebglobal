@@ -88,7 +88,7 @@ export function InvestmentWidget() {
 							<div className="bg-base-200 rounded-xl p-6 space-y-3">
 								<div className="flex items-center justify-between">
 									<span
-										className={`text-sm ${
+										className={`text-sm font-normal ${
 											theme === "light" ? "text-primary/95" : "text-gray-300"
 										}`}>
 										Minimum Investment
@@ -99,7 +99,7 @@ export function InvestmentWidget() {
 								</div>
 								<div className="flex items-center justify-between">
 									<span
-										className={`text-sm ${
+										className={`text-sm font-normal ${
 											theme === "light" ? "text-primary/95" : "text-gray-300"
 										}`}>
 										Expected Returns

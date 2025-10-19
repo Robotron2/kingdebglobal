@@ -4,6 +4,7 @@ import { HowItWorks } from "../components/HowItWorks"
 import { InvestmentWidget } from "../components/InvestmentWidget"
 import Navbar from "../components/Navbar"
 import { ProductCarousel } from "../components/ProductCarousel"
+import { Testimonials } from "../components/Testimonials"
 
 const Home = () => {
 	return (
@@ -26,6 +27,7 @@ const Home = () => {
 			</section>
 			<HowItWorks />
 			<InvestmentWidget />
+			<Testimonials />
 			<Footer />
 		</main>
 	)
