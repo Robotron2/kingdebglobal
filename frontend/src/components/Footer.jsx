@@ -25,20 +25,20 @@ const Footer = () => {
 					</nav>
 					<form className="w-full col-span-full md:col-auto">
 						<h6 className="footer-title text-lg">Newsletter</h6>
-						<fieldset className="w-full">
-							<label className="mr-4 mb-8">Enter your email address</label>
+						<fieldset className="w-full ">
+							<label className="mr-4 mb-1">Enter your email address</label>
 							<div className="join">
 								{/* <input
-                                type="text"
-                                placeholder="username@site.com"
-                                className="input input-bordered join-item"
-                            /> */}
-								<input
 									type="text"
 									placeholder="username@site.com"
-									className="input input-bordered join-item p-2 outline-none active:outline-none text-primary mt-1"
+									className="input input-bordered join-item"
+								/> */}
+								<input
+									type="text"
+									placeholder="user@gmail.com"
+									className="input input-bordered join-item p-2 outline-none active:outline-none text-primary"
 								/>
-								<button className="btn bg-secondary text-white p-1 join-item outline-none border-none">
+								<button className="btn bg-secondary text-white p-2 join-item outline-none border-none">
 									Subscribe
 								</button>
 							</div>

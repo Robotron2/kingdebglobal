@@ -1,8 +1,6 @@
-import Footer from "../components/Footer"
 import Hero from "../components/Hero"
 import { HowItWorks } from "../components/HowItWorks"
 import { InvestmentWidget } from "../components/InvestmentWidget"
-import Navbar from "../components/Navbar"
 import { ProductCarousel } from "../components/ProductCarousel"
 import { Testimonials } from "../components/Testimonials"
 
