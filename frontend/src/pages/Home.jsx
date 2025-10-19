@@ -9,7 +9,7 @@ import { Testimonials } from "../components/Testimonials"
 const Home = () => {
 	return (
 		<main className="min-h-screen">
-			<Navbar />
+			{/* <Navbar /> */}
 			<Hero />
 
 			<section id="products" className="py-20">
@@ -28,7 +28,7 @@ const Home = () => {
 			<HowItWorks />
 			<InvestmentWidget />
 			<Testimonials />
-			<Footer />
+			{/* <Footer /> */}
 		</main>
 	)
 }

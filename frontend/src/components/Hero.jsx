@@ -49,7 +49,7 @@ export function Hero() {
 				/>
 				<div
 					className={`absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 ${
-						theme === "light" ? "to-accentLight" : "to-black/80"
+						theme === "light" ? "to-accent-light" : "to-black/80"
 					}`}
 				/>
 			</div>
@@ -99,13 +99,13 @@ export function Hero() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.6, delay: 0.4 }}>
-						<div className="flex items-center gap-2 text-white/90">
-							<Leaf className="h-5 w-5 text-secondary" />
-							<span className="text-sm font-medium">100% Organic</span>
+						<div className="flex items-center gap-2 text-muted-light">
+							<Leaf className="h-5 w-5 text-primary" />
+							<span className="text-base font-semibold">100% Organic</span>
 						</div>
 						<div className="flex items-center gap-2 text-white/90">
 							<TrendingUp className="h-5 w-5 text-accent" />
-							<span className="text-sm font-medium">Sustainable Farming</span>
+							<span className="text-base font-semibold">Sustainable Farming</span>
 						</div>
 					</motion.div>
 				</motion.div>

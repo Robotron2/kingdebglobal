@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useTheme } from "../hooks/useTheme"
 
 const Footer = () => {
@@ -8,17 +9,13 @@ const Footer = () => {
 				<div className="footer py-10 md:py-16 grid-cols-2 md:grid-cols-4 lg:grid-cols-auto">
 					<nav>
 						<h6 className="footer-title text-lg">Services</h6>
-						<a className="link link-hover">Branding</a>
-						<a className="link link-hover">Design</a>
-						<a className="link link-hover">Marketing</a>
-						<a className="link link-hover">Advertisement</a>
+						<a className="link link-hover">Purchase</a>
+						<a className="link link-hover">Invest</a>
 					</nav>
 					<nav>
 						<h6 className="footer-title text-lg">Company</h6>
 						<a className="link link-hover">About us</a>
 						<a className="link link-hover">Contact</a>
-						<a className="link link-hover">Jobs</a>
-						<a className="link link-hover">Press kit</a>
 					</nav>
 					<nav>
 						<h6 className="footer-title text-lg">Legal</h6>
@@ -29,7 +26,7 @@ const Footer = () => {
 					<form className="w-full col-span-full md:col-auto">
 						<h6 className="footer-title text-lg">Newsletter</h6>
 						<fieldset className="w-full">
-							<label className="mr-4">Enter your email address</label>
+							<label className="mr-4 mb-8">Enter your email address</label>
 							<div className="join">
 								{/* <input
                                 type="text"
@@ -39,7 +36,7 @@ const Footer = () => {
 								<input
 									type="text"
 									placeholder="username@site.com"
-									className="input input-bordered join-item p-2 outline-none active:outline-none text-primary"
+									className="input input-bordered join-item p-2 outline-none active:outline-none text-primary mt-1"
 								/>
 								<button className="btn bg-secondary text-white p-1 join-item outline-none border-none">
 									Subscribe
@@ -53,15 +50,24 @@ const Footer = () => {
 						<p>&copy; 2025 Theophilus, Inc. All rights reserved.</p>
 					</div>
 					<div className="grid grid-flow-col gap-4 py-4">
-						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+						<Link
+							target="blank"
+							to="https://x.com/The0_ph1lus"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-twitter text-xl"></i>
-						</a>
-						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+						</Link>
+						<Link
+							target="blank"
+							to="https://www.instagram.com/the0_ph1lus"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-instagram text-xl"></i>
-						</a>
-						<a href="#" className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+						</Link>
+						<Link
+							target="blank"
+							to="https://github.com/robotron2"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
 							<i className="bi bi-github text-xl"></i>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

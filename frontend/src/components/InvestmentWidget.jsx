@@ -108,7 +108,7 @@ export function InvestmentWidget() {
 										₦{calculateReturns(months[0])}
 									</span>
 								</div>
-								<div className="flex items-center justify-between pt-3 border-t border-border">
+								<div className="flex items-center justify-between pt-3 border-t border-base-300">
 									<span className="text-sm font-medium text-card-foreground">Total Value</span>
 									<span className="text-2xl font-bold text-primary">
 										₦

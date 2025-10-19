@@ -1,7 +1,8 @@
 import "bootstrap-icons/font/bootstrap-icons.css"
-import { useEffect } from "react"
-import { Route, Routes, useLocation } from "react-router-dom"
-import Home from "./pages/Home"
+import { Suspense, lazy, useEffect } from "react"
+import { Navigate, Route, Routes, useLocation } from "react-router-dom"
+import Loading from "./components/ui/Loading"
+import Layout from "./components/ui/Layout"
 
 const ScrollToTop = () => {
 	const { pathname } = useLocation()
@@ -12,14 +13,38 @@ const ScrollToTop = () => {
 
 	return null
 }
-
+const Home = lazy(() => import("./pages/Home"))
+const About = lazy(() => import("./pages/About"))
 const App = () => {
 	return (
 		<>
-			{/* <ScrollToTop /> */}
-			<Routes>
-				<Route path="/" element={<Home />} />
-			</Routes>
+			<Suspense fallback={<Loading />}>
+				<Routes>
+					{/* Layout used as root - shared header/footer */}
+					<Route element={<Layout />}>
+						<Route index element={<Home />} />
+						<Route path="about" element={<About />} />
+
+						{/* protected subtree */}
+						{/* <Route
+						path="dashboard"
+						element={
+							<ProtectedRoute>
+								<Dashboard />
+							</ProtectedRoute>
+						}
+					/> */}
+					</Route>
+
+					{/* Auth pages that don't use the layout*/}
+					{/* <Route path="/signin" element={<SignIn />} /> */}
+					{/* <Route path="/register" element={<Register />} /> */}
+
+					{/* catch-all */}
+					<Route path="*" element={<Navigate to="/" replace />} />
+				</Routes>
+			</Suspense>
+			<ScrollToTop />
 		</>
 	)
 }
