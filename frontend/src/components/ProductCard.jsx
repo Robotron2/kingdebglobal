@@ -37,7 +37,7 @@ export function ProductCard({ product }) {
 					</div>
 
 					<div className="flex items-baseline gap-2">
-						<span className="text-2xl font-bold text-card-foreground">₦ {product.price}</span>
+						<span className="text-2xl font-bold text-card-foreground">₦{product.price}</span>
 						<span className="text-sm text-muted-foreground">/ {product.unit}</span>
 					</div>
 				</CardContent>

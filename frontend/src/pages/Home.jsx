@@ -1,6 +1,7 @@
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"
 import { HowItWorks } from "../components/HowItWorks"
+import { InvestmentWidget } from "../components/InvestmentWidget"
 import Navbar from "../components/Navbar"
 import { ProductCarousel } from "../components/ProductCarousel"
 
@@ -10,7 +11,7 @@ const Home = () => {
 			<Navbar />
 			<Hero />
 
-			<section id="products" className="py-20 bg-accent/5">
+			<section id="products" className="py-20">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center mb-12">
 						<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -24,6 +25,7 @@ const Home = () => {
 				</div>
 			</section>
 			<HowItWorks />
+			<InvestmentWidget />
 			<Footer />
 		</main>
 	)

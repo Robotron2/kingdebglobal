@@ -62,7 +62,10 @@ export default {
 				secondary: "#66944C", // lighter green
 				tertiary: "#7CB35C", // soft accent green
 				accent: "#E3AF32", // pineapple gold
-				accentLight: "#f4dba1", // pineapple gold
+				"accent-light": "#f4dba1", // pineapple gold
+				"muted-light": "#F9F8FA",
+				"muted-dark": "#262626",
+				"muted-foreground": "#797979",
 			},
 			container: {
 				center: true,
