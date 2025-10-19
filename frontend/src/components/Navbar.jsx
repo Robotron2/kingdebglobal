@@ -208,7 +208,7 @@ const Navbar = () => {
 								</li>
 							</ul>
 						</div>
-						<a href="/" className="btn btn-ghost font-bold text-2xl outline-none">
+						<a href="/" className=" font-bold text-2xl outline-none">
 							The0
 						</a>
 					</div>

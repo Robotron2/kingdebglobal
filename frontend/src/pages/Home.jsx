@@ -1,5 +1,6 @@
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"
+import { HowItWorks } from "../components/HowItWorks"
 import Navbar from "../components/Navbar"
 import { ProductCarousel } from "../components/ProductCarousel"
 
@@ -22,6 +23,7 @@ const Home = () => {
 					<ProductCarousel />
 				</div>
 			</section>
+			<HowItWorks />
 			<Footer />
 		</main>
 	)
