@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
 import { ShoppingBag, Sprout, TrendingUp } from "lucide-react"
+import { fadeIn } from "../../utils/data/variants"
 
 const steps = [
 	{
@@ -27,10 +28,10 @@ export function HowItWorks() {
 		<section id="how-it-works" className="container py-20 bg-muted/30">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
+					variants={fadeIn("down", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}
 					className="text-center mb-16">
 					{/* <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">How It Works</h2> */}
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">How It Works </h2>
@@ -43,10 +44,10 @@ export function HowItWorks() {
 					{steps.map((step, index) => (
 						<motion.div
 							key={step.title}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.6, delay: index * 0.1 }}
+							variants={fadeIn("up", 0.1)}
+							initial="hidden"
+							whileInView={"show"}
+							viewport={{ once: false, amount: 0.4 }}
 							className="relative">
 							<div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 text-center h-full shadow-xl hover:shadow-2xl transition-shadow">
 								<div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
