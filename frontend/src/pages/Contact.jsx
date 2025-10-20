@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react"
 import { Mail, Phone, Globe, Briefcase } from "lucide-react"
+import { motion } from "framer-motion"
+import { fadeIn } from "../../utils/data/variants"
 
 const Contact = () => {
 	const [userType, setUserType] = useState("individual")
@@ -8,10 +11,15 @@ const Contact = () => {
 	const inactiveClass = "bg-primary/20 text-base-content/20"
 
 	return (
-		<section className="container mx-auto py-12 px-4 lg:px-8 my-20">
+		<section className="container mx-auto py-12 px-6 lg:px-8 my-20">
 			<div className="flex flex-col md:flex-row md:space-x-8 lg:space-x-12">
 				{/* Left Side: Contact Info */}
-				<div className="w-full md:w-1/2 mb-10 lg:mb-0">
+				<motion.div
+					className="w-full md:w-1/2 mb-10 lg:mb-0"
+					variants={fadeIn("right", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}>
 					<h2 className="text-2xl font-semibold text-secondary mb-4">Get In Touch</h2>
 					<p className="text-primary-content-600 mb-6">
 						At <strong className="font-semibold">The0 Ltd</strong>, we’re always here to connect with our
@@ -47,10 +55,15 @@ const Contact = () => {
 							<strong className="font-medium">Company:</strong> THE0 LIMITED
 						</p>
 					</div>
-				</div>
+				</motion.div>
 
 				{/* Right Side: Contact Form */}
-				<div className="w-full md:w-1/2 p-6 bg-base-100 rounded-xl shadow-2xl">
+				<motion.div
+					className="w-full md:w-1/2 p-6 bg-base-100 rounded-xl shadow-2xl"
+					variants={fadeIn("left", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}>
 					<h3 className="text-2xl font-bold mb-6 text-primary">Send Us a Message</h3>
 
 					{/* 2. Toggle Buttons */}
@@ -141,7 +154,7 @@ const Contact = () => {
 							Submit Message
 						</button>
 					</form>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	)
