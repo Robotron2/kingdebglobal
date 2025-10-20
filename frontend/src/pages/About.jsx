@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import Banner from "../components/Banner"
 import pineBg from "../../src/assets/pineapple-field-aerial-view-tropical-farm.jpg"
 import { useTheme } from "../hooks/useTheme"
-import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/Card"
+import { fadeIn } from "../../utils/data/variants"
+import { motion } from "framer-motion"
+
 const About = () => {
 	const { theme } = useTheme()
 	return (
@@ -16,7 +19,12 @@ const About = () => {
 				{/* Who we are */}
 				<div className="flex flex-col lg:flex-row lg:space-x-8 px-4 py-8">
 					{/* Left side with Image content */}
-					<div className="w-full lg:w-1/2 flex flex-col space-y-4 mb-8 lg:mb-0">
+					<motion.div
+						className="w-full lg:w-1/2 flex flex-col space-y-4 mb-8 lg:mb-0"
+						variants={fadeIn("left", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<div className="rounded-2xl shadow-xl overflow-hidden h-80 lg:h-auto lg:max-h-[350px] ">
 							{/* Image One */}
 							<img src={pineBg} alt="Logistics Warehouse" className="w-full h-full object-cover" />
@@ -33,7 +41,7 @@ const About = () => {
 								<img src={pineBg} alt="Fleet of Trucks" className="w-full h-full object-cover" />
 							</div>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Right side with texts*/}
 					{/* <div className="w-full lg:w-1/2">
@@ -53,7 +61,12 @@ const About = () => {
 							more sustainable future for all.
 						</p>
 					</div> */}
-					<div className="w-full lg:w-1/2">
+					<motion.div
+						className="w-full lg:w-1/2"
+						variants={fadeIn("right", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">Who We Are</h2>
 
 						<p className={`mb-4 ${theme === "light" ? "text-muted-dark" : "text-muted-light"}`}>
@@ -69,14 +82,19 @@ const About = () => {
 							investment opportunities, we’re creating a thriving ecosystem that delivers growth — for
 							people, profit, and the planet.
 						</p>
-					</div>
+					</motion.div>
 				</div>
 			</section>
 
 			<section className="container my-10 mb-24 px-6">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{/* Vision */}
-					<div className="p-8 rounded-2xl shadow-lg bg-base-100">
+					<motion.div
+						className="p-8 rounded-2xl shadow-lg bg-base-100"
+						variants={fadeIn("right", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<p className="text-sm text-primary uppercase tracking-widest mb-2 font-medium">Our Vision</p>
 						<h3 className="text-2xl md:text-3xl font-bold text-accent mb-4">
 							To lead Africa’s pineapple production and investment revolution
@@ -86,10 +104,15 @@ const About = () => {
 							growth across Africa — empowering communities, investors, and consumers through innovation,
 							transparency, and eco-friendly agricultural practices.
 						</p>
-					</div>
+					</motion.div>
 
 					{/* Mission */}
-					<div className="p-8 rounded-2xl shadow-lg bg-base-100">
+					<motion.div
+						className="p-8 rounded-2xl shadow-lg bg-base-100"
+						variants={fadeIn("left", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<p className="text-sm text-primary uppercase tracking-widest mb-2 font-medium">Our Mission</p>
 						<h3 className="text-2xl md:text-3xl font-bold text-accent mb-4">
 							Growing wealth through sustainable pineapple farming
@@ -100,7 +123,7 @@ const About = () => {
 							transparency, and teamwork to create lasting impact for our farmers, partners, and the
 							planet.
 						</p>
-					</div>
+					</motion.div>
 				</div>
 			</section>
 		</>

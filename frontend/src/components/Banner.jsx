@@ -2,6 +2,7 @@
 import { useTheme } from "../hooks/useTheme"
 import { motion } from "framer-motion"
 import { Leaf, TrendingUp } from "lucide-react"
+import { fadeIn } from "../../utils/data/variants"
 
 const Banner = ({ title, subtitle, paragraph }) => {
 	const { theme } = useTheme()
@@ -29,9 +30,10 @@ const Banner = ({ title, subtitle, paragraph }) => {
 					transition={{ duration: 0.6 }}>
 					<motion.h1
 						className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-accent mb-6 text-balance"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.1 }}>
+						variants={fadeIn("down", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						{title}
 						<br />
 						<span className="text-accent mt-1">{subtitle}</span>
@@ -39,18 +41,20 @@ const Banner = ({ title, subtitle, paragraph }) => {
 
 					<motion.p
 						className="text-md sm:text-lg text-gray-300 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}>
+						variants={fadeIn("up", 0.2)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.5 }}>
 						{paragraph}
 					</motion.p>
 
 					{/* Trust Badges */}
 					<motion.div
 						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-12"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.6, delay: 0.4 }}>
+						variants={fadeIn("down", 0.3)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.6 }}>
 						<div className="flex items-center gap-2 text-gray-300">
 							<Leaf className="h-6 w-6 text-primary " />
 							<span className="text-base font-semibold">100% Organic</span>
