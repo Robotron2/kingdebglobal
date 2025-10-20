@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ProductCard } from "./ProductCard"
 import { useEffect, useState } from "react"
 import { products } from "../data/products"
+import { fadeIn } from "../../utils/data/variants"
 
 export function ProductCarousel() {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -71,7 +72,14 @@ export function ProductCarousel() {
 	}, [currentIndex, maxIndex])
 
 	return (
-		<div className="relative" role="region" aria-label="Product carousel">
+		<motion.div
+			className="relative"
+			role="region"
+			aria-label="Product carousel"
+			variants={fadeIn("up", 0.1)}
+			initial="hidden"
+			whileInView={"show"}
+			viewport={{ once: false, amount: 0.4 }}>
 			<div className="overflow-hidden">
 				<motion.div
 					className="flex gap-6"
@@ -130,6 +138,6 @@ export function ProductCarousel() {
 					/>
 				))}
 			</div>
-		</div>
+		</motion.div>
 	)
 }

@@ -1,40 +1,9 @@
 /* eslint-disable no-unused-vars */
-// import { useNavigate } from "react-router-dom"
-// import pineBg from "../../public/pineapple-field-aerial-view-tropical-farm.jpg"
-// import { motion } from "framer-motion"
-// import { fadeIn } from "../../utils/data/variants"
-
-// const Hero = () => {
-// 	const navigate = useNavigate()
-
-// 	return (
-// 		<section>
-// 			<div
-// 				className="hero min-h-screen"
-// 				style={{
-// 					backgroundImage: `url(${pineBg})`,
-// 				}}>
-// 				<div className="hero-overlay opacity-80 bg-black"></div>
-// 				<div className="hero-content text-neutral-content text-center">
-// 					<div className="max-w-md">
-// 						<h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-// 						<p className="mb-5">
-// 							Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-// 							quasi. In deleniti eaque aut repudiandae et a id nisi.
-// 						</p>
-// 						<button className="btn btn-primary">Get Started</button>
-// 					</div>
-// 				</div>
-// 			</div>
-// 		</section>
-// 	)
-// }
-
-// export default Hero
 
 import { motion } from "framer-motion"
-import { ShoppingBag, TrendingUp, Truck, Leaf } from "lucide-react"
+import { TrendingUp, Leaf } from "lucide-react"
 import { useTheme } from "../hooks/useTheme"
+import { fadeIn } from "../../utils/data/variants"
 
 export function Hero() {
 	const { theme } = useTheme()
@@ -57,14 +26,16 @@ export function Hero() {
 			{/* Content */}
 			<div className="relative z-10 max-w-7xl -mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}>
+					variants={fadeIn("down", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}>
 					<motion.h1
 						className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.1 }}>
+						variants={fadeIn("up", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						Fresh Tropical Pineapples
 						<br />
 						<span className="text-accent mt-1">From Farm to Table</span>
@@ -72,18 +43,20 @@ export function Hero() {
 
 					<motion.p
 						className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}>
+						variants={fadeIn("left", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						Experience the sweetest, most sustainable pineapples. Shop premium produce or invest in the
 						future of tropical agriculture.
 					</motion.p>
 
 					<motion.div
 						className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 "
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.3 }}>
+						variants={fadeIn("right", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<button className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6">
 							Shop Now
 						</button>
@@ -96,9 +69,10 @@ export function Hero() {
 					{/* Trust Badges */}
 					<motion.div
 						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8"
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 0.6, delay: 0.4 }}>
+						variants={fadeIn("left", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
 						<div className="flex items-center gap-2 text-muted-light">
 							<Leaf className="h-5 w-5 text-primary" />
 							<span className="text-base font-semibold">100% Organic</span>

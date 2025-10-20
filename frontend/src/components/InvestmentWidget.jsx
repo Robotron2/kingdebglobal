@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/Card"
 import { Slider } from "./ui/Slider"
 import { useTheme } from "../hooks/useTheme"
+import { fadeIn } from "../../utils/data/variants"
 
 export function InvestmentWidget() {
 	const [months, setMonths] = useState([12])
@@ -22,10 +23,10 @@ export function InvestmentWidget() {
 		<section id="invest" className="py-20 bg-acce">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
+					variants={fadeIn("down", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}
 					className="text-center mb-12">
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
 						Invest in Sustainable Agriculture
@@ -36,10 +37,10 @@ export function InvestmentWidget() {
 				</motion.div>
 
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6, delay: 0.2 }}
+					variants={fadeIn("up", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}
 					className="max-w-2xl mx-auto">
 					<Card className="backdrop-blur-sm border-gray-300/0 rounded-lg shadow-2xl">
 						<CardHeader>

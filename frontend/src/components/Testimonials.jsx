@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { Card, CardContent } from "./ui/Card"
 import { testimonials } from "../data/testimonials"
+import { fadeIn } from "../../utils/data/variants"
 
 export function Testimonials() {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -51,10 +52,10 @@ export function Testimonials() {
 		<section className="container py-20 bg-muted">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
+					variants={fadeIn("down", 0.1)}
+					initial="hidden"
+					whileInView={"show"}
+					viewport={{ once: false, amount: 0.4 }}
 					className="text-center mb-16">
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">
 						What Our Customers Say

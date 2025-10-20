@@ -15,6 +15,7 @@ const ScrollToTop = () => {
 }
 const Home = lazy(() => import("./pages/Home"))
 const About = lazy(() => import("./pages/About"))
+const Contact = lazy(() => import("./pages/Contact"))
 const App = () => {
 	return (
 		<>
@@ -24,6 +25,7 @@ const App = () => {
 					<Route element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path="about" element={<About />} />
+						<Route path="contact-us" element={<Contact />} />
 
 						{/* protected subtree */}
 						{/* <Route
