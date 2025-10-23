@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { TrendingUp, Leaf } from "lucide-react"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
-import pineBg from "../../public/hero.webp"
+import pineBg from "/hero.webp"
 
 export function Hero() {
 	const { theme } = useTheme()

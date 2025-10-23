@@ -284,6 +284,7 @@
 import { useState, useRef, useEffect } from "react"
 import { useTheme } from "../hooks/useTheme"
 import { Link } from "react-router-dom"
+import Logo from "/logo.webp"
 
 const THEMES = ["light", "dark", "system"]
 
@@ -343,9 +344,10 @@ const Navbar = () => {
 			<div className="container py-0">
 				<div className="navbar py-0">
 					{/* Left Section */}
-					<div className="navbar-start">
+
+					<div className="navbar-start flex items-center gap-2">
+						{/* Mobile Menu Button */}
 						<div className="relative lg:hidden">
-							{/* Hamburger */}
 							<button
 								onClick={() => setMobileOpen(!mobileOpen)}
 								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0">
@@ -375,8 +377,10 @@ const Navbar = () => {
 							</div>
 						</div>
 
-						<Link to="/" className="font-bold text-2xl outline-none">
-							The0
+						{/* Logo + Text */}
+						<Link to="/" className="flex items-center gap-2 font-bold text-2xl outline-none">
+							<img src={Logo} alt="Kngdgb logo" className="w-24 h-24 object-contain" />
+							<span>KingDebGlobal</span>
 						</Link>
 					</div>
 
