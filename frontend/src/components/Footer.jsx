@@ -45,9 +45,43 @@ const Footer = () => {
 						</fieldset>
 					</form>
 				</div>
-				<div className="flex flex-col sm:flex-row items-center border-t border-base-300 py-4 gap-2">
+				<div className="flex flex-col sm:flex-row items-center justify-between border-t border-base-300 py-4 gap-2 text-center sm:text-start">
+					{/* Left: Copyright */}
+					<div className="flex-1">
+						<p>&copy; 2025 KingDebGlobal, Inc. All rights reserved.</p>
+					</div>
+
+					{/* Center: Motto */}
+					<div className="flex-1 text-center font-medium">
+						<p>Green is Life, Green is Wealth</p>
+					</div>
+
+					{/* Right: Social Icons */}
+					<div className="flex-1 flex justify-center sm:justify-end gap-4">
+						<Link
+							target="blank"
+							to="https://x.com/The0_ph1lus"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+							<i className="bi bi-twitter text-xl"></i>
+						</Link>
+						<Link
+							target="blank"
+							to="https://www.instagram.com/the0_ph1lus"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+							<i className="bi bi-instagram text-xl"></i>
+						</Link>
+						<Link
+							target="blank"
+							to="https://github.com/robotron2"
+							className={`link ${theme === "light" ? "text-base-200" : "text-secondary"}`}>
+							<i className="bi bi-github text-xl"></i>
+						</Link>
+					</div>
+				</div>
+
+				{/* <div className="flex flex-col sm:flex-row items-center border-t border-base-300 py-4 gap-2">
 					<div className="flex-grow text-center sm:text-start">
-						<p>&copy; 2025 Theophilus, Inc. All rights reserved.</p>
+						<p>&copy; 2025 KingDebGlobal, Inc. All rights reserved.</p>
 					</div>
 					<div className="grid grid-flow-col gap-4 py-4">
 						<Link
@@ -69,7 +103,7 @@ const Footer = () => {
 							<i className="bi bi-github text-xl"></i>
 						</Link>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</footer>
 	)
