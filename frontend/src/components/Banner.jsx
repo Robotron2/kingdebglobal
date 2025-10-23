@@ -3,18 +3,15 @@ import { useTheme } from "../hooks/useTheme"
 import { motion } from "framer-motion"
 import { Leaf, TrendingUp } from "lucide-react"
 import { fadeIn } from "../../utils/data/variants"
+import bannerImg from "/hero.webp"
 
 const Banner = ({ title, subtitle, paragraph }) => {
 	const { theme } = useTheme()
 	return (
 		<section className="relative min-h-screen -mt-8 flex items-center justify-center overflow-hidden">
 			{/* Background Image */}
-			<div className="absolute inset-0 z-0">
-				<img
-					src="/pineapple-field-aerial-view-tropical-farm.jpg"
-					alt="Pineapple farm aerial view"
-					className="w-full h-full object-cover"
-				/>
+			<div className="absolute inset-0 z-0 overflow-hidden">
+				<img src={bannerImg} alt="Pineapple farm aerial view" className="w-full h-full object-cover" />
 				<div
 					className={`absolute inset-0 bg-gradient-to-b from-black via-black/40 ${
 						theme === "light" ? "to-accent-light" : "to-black"
@@ -23,7 +20,7 @@ const Banner = ({ title, subtitle, paragraph }) => {
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 max-w-7xl -mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+			<div className="relative z-10 max-w-7xl -mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center overflow-hidden">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}

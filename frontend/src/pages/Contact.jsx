@@ -19,7 +19,7 @@ const Contact = () => {
 				paragraph="Have a question, partnership idea, or investment inquiry? Reach out — our team is always ready to connect and help you grow with us."
 			/>
 
-			<section className="container mx-auto py-12 px-6 lg:px-8 my-20">
+			<section className="container mx-auto py-12 px-6 lg:px-8 my-20 overflow-hidden">
 				<div className="flex flex-col md:flex-row md:space-x-8 lg:space-x-12">
 					{/* Left Side: Contact Info */}
 					<motion.div

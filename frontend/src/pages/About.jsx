@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Banner from "../components/Banner"
-import pineBg from "../../src/assets/pineapple-field-aerial-view-tropical-farm.jpg"
+import pineBg from "../../src/assets/hero.webp"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
 import { motion } from "framer-motion"
@@ -15,7 +15,7 @@ const About = () => {
 				paragraph={"Growing Africa’s finest pineapples while building wealth, sustainability, and opportunity."}
 			/>
 
-			<section className="container h-1/2 mx-auto my-8">
+			<section className="container h-1/2 mx-auto my-8 overflow-hidden">
 				{/* Who we are */}
 				<div className="flex flex-col lg:flex-row lg:space-x-8 px-4 py-8">
 					{/* Left side with Image content */}
@@ -86,7 +86,7 @@ const About = () => {
 				</div>
 			</section>
 
-			<section className="container my-10 mb-24 px-6">
+			<section className="container my-10 mb-24 px-6 overflow-hidden">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{/* Vision */}
 					<motion.div

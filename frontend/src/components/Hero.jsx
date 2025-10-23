@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { TrendingUp, Leaf } from "lucide-react"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
+import pineBg from "../../public/hero.webp"
 
 export function Hero() {
 	const { theme } = useTheme()
@@ -11,11 +12,7 @@ export function Hero() {
 		<section className="relative min-h-screen -mt-8 flex items-center justify-center overflow-hidden">
 			{/* Background Image */}
 			<div className="absolute inset-0 z-0">
-				<img
-					src="/pineapple-field-aerial-view-tropical-farm.jpg"
-					alt="Pineapple farm aerial view"
-					className="w-full h-full object-cover"
-				/>
+				<img src={pineBg} alt="Pineapple farm aerial view" className="w-full h-full object-cover" />
 				<div
 					className={`absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 ${
 						theme === "light" ? "to-accent-light" : "to-black/80"
