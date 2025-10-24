@@ -27,13 +27,26 @@ export function Hero() {
 					initial="hidden"
 					whileInView={"show"}
 					viewport={{ once: false, amount: 0.4 }}>
+					<motion.h5
+						className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 text-balance"
+						variants={fadeIn("down", 0.1)}
+						initial="hidden"
+						whileInView={"show"}
+						viewport={{ once: false, amount: 0.4 }}>
+						<span
+							className="text-primary
+                        ">
+							Green
+						</span>{" "}
+						is Life, <span className="text-primary">Green </span> is Wealth
+					</motion.h5>
 					<motion.h1
 						className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance"
 						variants={fadeIn("up", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
-						Fresh Tropical Pineapples
+						Fresh <span className="text-accent">Tropical</span> Pineapples
 						<br />
 						<span className="text-accent mt-1">From Farm to Table</span>
 					</motion.h1>

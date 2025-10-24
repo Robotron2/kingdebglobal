@@ -68,7 +68,7 @@ const Navbar = () => {
 							<button
 								onClick={() => setMobileOpen(!mobileOpen)}
 								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0">
-								<i className="bi bi-list text-2xl font-bold"></i>
+								<i className="bi bi-list text-lg font-bold"></i>
 							</button>
 
 							{/* Mobile Dropdown */}
@@ -94,10 +94,18 @@ const Navbar = () => {
 							</div>
 						</div>
 
-						{/* Logo + Text */}
-						<Link to="/" className="flex items-center gap-2 font-bold text-2xl outline-none">
-							<img src={Logo} alt="Kngdgb logo" className="w-24 h-24 object-contain" />
-							<span>KingDebGlobal</span>
+						{/* Logo */}
+						<Link
+							to="/"
+							className="flex items-center gap-1 font-bold text-xl outline-none justify-betwee w-full">
+							<img
+								src={Logo}
+								alt="Kngdgb logo"
+								className="w-24 h-24 object-contain bg-red-00 -ml-8 sm:-ml-0 -mr-7"
+							/>
+							<span className="hidden sm:block text-nowrap text-sm md:text-xl w-full">
+								King Deb Global
+							</span>
 						</Link>
 					</div>
 
@@ -119,9 +127,9 @@ const Navbar = () => {
 							<button
 								onClick={() => setOpen(!open)}
 								className="btn btn-circle transition-transform hover:scale-110">
-								{theme === "light" && <i className="bi bi-sun text-2xl"></i>}
-								{theme === "dark" && <i className="bi bi-moon text-2xl"></i>}
-								{theme === "system" && <i className="bi bi-laptop text-2xl"></i>}
+								{theme === "light" && <i className="bi bi-sun text-xl"></i>}
+								{theme === "dark" && <i className="bi bi-moon text-xl"></i>}
+								{theme === "system" && <i className="bi bi-laptop text-xl"></i>}
 							</button>
 
 							<div
