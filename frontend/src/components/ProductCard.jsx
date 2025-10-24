@@ -47,10 +47,10 @@ export function ProductCard({ product }) {
 						<ShoppingCart className="mr-2 h-4 w-4" />
 						Add to Cart
 					</Button> */}
-					<button className="w-3/4 mx-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center p-2 rounded-lg">
+					{/* <button className="w-3/4 mx-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center p-2 rounded-lg">
 						<ShoppingCart className="mr-2 h-4 w-4" />
 						Add to Cart
-					</button>
+					</button> */}
 				</CardFooter>
 			</Card>
 		</motion.div>

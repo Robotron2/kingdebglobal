@@ -25,7 +25,7 @@ const Home = () => {
 							Our Premium Products
 						</h2>
 						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							From fresh fruit to plants and treats, discover our full range of tropical offerings.
+							From plants, to fresh fruits and treats, discover our full range of tropical offerings.
 						</p>
 					</motion.div>
 					<ProductCarousel />
