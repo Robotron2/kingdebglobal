@@ -21,14 +21,14 @@ export function Hero() {
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 max-w-7xl -mt-24 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+			<div className="relative z-10 max-w-7xl -mt-20 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
 				<motion.div
 					variants={fadeIn("down", 0.1)}
 					initial="hidden"
 					whileInView={"show"}
 					viewport={{ once: false, amount: 0.4 }}>
 					<motion.h5
-						className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 text-balance"
+						className="text-6xl md:text-7xl sm:text-5xl  font-bold text-white mb-6 text-balance"
 						variants={fadeIn("down", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -41,7 +41,7 @@ export function Hero() {
 						is Life, <span className="text-primary">Green </span> is Wealth
 					</motion.h5>
 					<motion.h1
-						className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance"
+						className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 text-balance"
 						variants={fadeIn("up", 0.1)}
 						initial="hidden"
 						whileInView={"show"}

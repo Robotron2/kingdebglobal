@@ -6,6 +6,7 @@ import { Testimonials } from "../components/Testimonials"
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion"
 import { fadeIn } from "../../utils/data/variants"
+import Faq from "../components/FAQ"
 
 const Home = () => {
 	return (
@@ -34,6 +35,7 @@ const Home = () => {
 			<HowItWorks />
 			<InvestmentWidget />
 			<Testimonials />
+			<Faq />
 			{/* <Footer /> */}
 		</main>
 	)
