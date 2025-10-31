@@ -70,7 +70,7 @@ const About = () => {
 						<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">Who We Are</h2>
 
 						<p className={`mb-4 ${theme === "light" ? "text-muted-dark" : "text-muted-light"}`}>
-							At <strong className="text-primary">The0 Ltd</strong>, we bridge the gap between agriculture
+							At <strong className="text-primary">King Deb Global</strong>, we bridge the gap between agriculture
 							and investment. Through innovation, sustainability, and transparency, we’re building
 							Africa’s leading pineapple brand — where every fruit harvested and every naira invested
 							contributes to lasting value.

@@ -105,7 +105,7 @@ const Contact = () => {
 						<div className="space-y-3">
 							<p>
 								<Phone className="inline-block h-4 w-4 mr-2 text-primary/95" />
-								<strong className="font-medium">Phone:</strong> 07031968530
+								<strong className="font-medium">Phone:</strong> +2347031968530, +2347088973250
 							</p>
 							<p>
 								<Mail className="inline-block h-4 w-4 mr-2 text-primary/95" />
