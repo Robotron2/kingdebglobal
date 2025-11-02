@@ -3,6 +3,7 @@ import Banner from "../components/Banner"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
 import { motion } from "framer-motion"
+import YouTubeEmbed from "../components/YoutubeEmbed"
 
 const About = () => {
 	const { theme } = useTheme()
@@ -24,41 +25,22 @@ const About = () => {
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
-						<div className="rounded-2xl shadow-xl overflow-hidden h-80 lg:h-auto lg:max-h-[350px] ">
+						<div className="rounded-2xl shadow-xl overflow-hidden h-96 lg:h-auto lg:max-h-[350px] ">
 							{/* Image One */}
 							{/* <img src={pineBg} alt="Logistics Warehouse" className="w-full h-full object-cover" /> */}
 
-							<iframe
-								width="560"
-								height="315"
-								src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
-								title="YouTube video player"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-								referrerPolicy="strict-origin-when-cross-origin"
-								allowFullScreen></iframe>
+							<YouTubeEmbed src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA" />
 						</div>
 
 						<div className="flex space-x-4">
 							{/* Image Two */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<iframe
-									// width="560"
-									// height="315"
-									src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x"
-									title="YouTube video player"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									referrerPolicy="strict-origin-when-cross-origin"
-									allowFullScreen></iframe>
+								<YouTubeEmbed src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x" />
 							</div>
 
 							{/* Image Three */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<iframe
-									src="https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"
-									title="YouTube video player"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									referrerPolicy="strict-origin-when-cross-origin"
-									allowFullScreen></iframe>
+								<YouTubeEmbed src={"https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"} />
 							</div>
 						</div>
 					</motion.div>
