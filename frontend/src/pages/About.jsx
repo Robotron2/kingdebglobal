@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import Banner from "../components/Banner"
-import pineBg from "../../src/assets/hero.webp"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
 import { motion } from "framer-motion"
@@ -27,18 +26,39 @@ const About = () => {
 						viewport={{ once: false, amount: 0.4 }}>
 						<div className="rounded-2xl shadow-xl overflow-hidden h-80 lg:h-auto lg:max-h-[350px] ">
 							{/* Image One */}
-							<img src={pineBg} alt="Logistics Warehouse" className="w-full h-full object-cover" />
+							{/* <img src={pineBg} alt="Logistics Warehouse" className="w-full h-full object-cover" /> */}
+
+							<iframe
+								width="560"
+								height="315"
+								src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
+								title="YouTube video player"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								referrerPolicy="strict-origin-when-cross-origin"
+								allowFullScreen></iframe>
 						</div>
 
 						<div className="flex space-x-4">
 							{/* Image Two */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<img src={pineBg} alt="Trucks at Port" className="w-full h-full object-cover" />
+								<iframe
+									// width="560"
+									// height="315"
+									src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x"
+									title="YouTube video player"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									referrerPolicy="strict-origin-when-cross-origin"
+									allowFullScreen></iframe>
 							</div>
 
 							{/* Image Three */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<img src={pineBg} alt="Fleet of Trucks" className="w-full h-full object-cover" />
+								<iframe
+									src="https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"
+									title="YouTube video player"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									referrerPolicy="strict-origin-when-cross-origin"
+									allowFullScreen></iframe>
 							</div>
 						</div>
 					</motion.div>
@@ -70,10 +90,10 @@ const About = () => {
 						<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-4">Who We Are</h2>
 
 						<p className={`mb-4 ${theme === "light" ? "text-muted-dark" : "text-muted-light"}`}>
-							At <strong className="text-primary">King Deb Global</strong>, we bridge the gap between agriculture
-							and investment. Through innovation, sustainability, and transparency, we’re building
-							Africa’s leading pineapple brand — where every fruit harvested and every naira invested
-							contributes to lasting value.
+							At <strong className="text-primary">King Deb Global</strong>, we bridge the gap between
+							agriculture and investment. Through innovation, sustainability, and transparency, we’re
+							building Africa’s leading pineapple brand — where every fruit harvested and every naira
+							invested contributes to lasting value.
 						</p>
 
 						<p className={`${theme === "light" ? "text-muted-dark" : "text-muted-light"}`}>
