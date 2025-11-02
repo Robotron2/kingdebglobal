@@ -29,18 +29,27 @@ const About = () => {
 							{/* Image One */}
 							{/* <img src={pineBg} alt="Logistics Warehouse" className="w-full h-full object-cover" /> */}
 
-							<YouTubeEmbed src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA" />
+							<YouTubeEmbed
+								src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
+								className="h-full lg:h-[350px] w-full"
+							/>
 						</div>
 
 						<div className="flex space-x-4">
 							{/* Image Two */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<YouTubeEmbed src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x" />
+								<YouTubeEmbed
+									src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x"
+									className="w-full aspect-video h-full"
+								/>
 							</div>
 
 							{/* Image Three */}
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
-								<YouTubeEmbed src={"https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"} />
+								<YouTubeEmbed
+									src={"https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"}
+									className="w-full aspect-video h-full"
+								/>
 							</div>
 						</div>
 					</motion.div>
