@@ -62,12 +62,12 @@ const Navbar = () => {
 				<div className="navbar py-0">
 					{/* Left Section */}
 
-					<div className="navbar-start flex items-center  gap-2 w-full">
+					<div className="navbar-start flex items-center gap-2">
 						{/* Mobile Menu Button */}
-						<div className="relative lg:hidden mb-3">
+						<div className="relative lg:hidden">
 							<button
 								onClick={() => setMobileOpen(!mobileOpen)}
-								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0">
+								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0 mb-3">
 								<i className="bi bi-list text-lg font-bold"></i>
 							</button>
 
@@ -95,7 +95,9 @@ const Navbar = () => {
 						</div>
 
 						{/* Logo */}
-						<Link to="/" className="flex items-center gap-1 font-bold text-xl outline-none w-full">
+						<Link
+							to="/"
+							className="flex items-center gap-1 font-bold text-xl outline-none justify-betwee w-full">
 							<img
 								src={Logo}
 								alt="Kngdgb logo"
@@ -119,10 +121,10 @@ const Navbar = () => {
 
 					{/* Right Section - Theme Toggle */}
 					<div className="navbar-end" ref={dropdownRef}>
-						<div className="relative mb-3">
+						<div className="relative">
 							<button
 								onClick={() => setOpen(!open)}
-								className="btn btn-circle transition-transform hover:scale-110">
+								className="btn btn-circle transition-transform hover:scale-110 mb-3">
 								{theme === "light" && <i className="bi bi-sun text-xl"></i>}
 								{theme === "dark" && <i className="bi bi-moon text-xl"></i>}
 								{theme === "system" && <i className="bi bi-laptop text-xl"></i>}
