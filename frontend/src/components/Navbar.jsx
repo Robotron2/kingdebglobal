@@ -62,9 +62,9 @@ const Navbar = () => {
 				<div className="navbar py-0">
 					{/* Left Section */}
 
-					<div className="navbar-start flex items-center gap-2">
+					<div className="navbar-start flex items-center  gap-2 w-full">
 						{/* Mobile Menu Button */}
-						<div className="relative lg:hidden">
+						<div className="relative lg:hidden mb-3">
 							<button
 								onClick={() => setMobileOpen(!mobileOpen)}
 								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0">
@@ -95,17 +95,13 @@ const Navbar = () => {
 						</div>
 
 						{/* Logo */}
-						<Link
-							to="/"
-							className="flex items-center gap-1 font-bold text-xl outline-none justify-betwee w-full">
+						<Link to="/" className="flex items-center gap-1 font-bold text-xl outline-none w-full">
 							<img
 								src={Logo}
 								alt="Kngdgb logo"
 								className="w-24 h-24 object-contain bg-red-00 -ml-8 sm:-ml-0 -mr-7"
 							/>
-							<span className="hidden sm:block text-nowrap text-sm md:text-xl w-full">
-								King Deb Global
-							</span>
+							<span className="text-nowrap text-sm md:text-xl w-full">King Deb Global</span>
 						</Link>
 					</div>
 
@@ -123,7 +119,7 @@ const Navbar = () => {
 
 					{/* Right Section - Theme Toggle */}
 					<div className="navbar-end" ref={dropdownRef}>
-						<div className="relative">
+						<div className="relative mb-3">
 							<button
 								onClick={() => setOpen(!open)}
 								className="btn btn-circle transition-transform hover:scale-110">
