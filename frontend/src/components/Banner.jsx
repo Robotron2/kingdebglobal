@@ -44,36 +44,8 @@ const Banner = ({ title, subtitle, paragraph }) => {
 						viewport={{ once: false, amount: 0.5 }}>
 						{paragraph}
 					</motion.p>
-
-					{/* Trust Badges */}
-					<motion.div
-						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-12"
-						variants={fadeIn("down", 0.3)}
-						initial="hidden"
-						whileInView={"show"}
-						viewport={{ once: false, amount: 0.6 }}>
-						<div className="flex items-center gap-2 text-gray-300">
-							<Leaf className="h-6 w-6 text-primary " />
-							<span className="text-base font-semibold">100% Organic</span>
-						</div>
-						<div className="flex items-center gap-2 text-gray-300">
-							<TrendingUp className="h-6 w-6 text-accent" />
-							<span className="text-base font-semibold">Sustainable Farming</span>
-						</div>
-					</motion.div>
 				</motion.div>
 			</div>
-
-			{/* Scroll Indicator */}
-			<motion.div
-				className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-				initial={{ opacity: 0, y: -10 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6, delay: 0.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}>
-				<div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-					<div className="w-1.5 h-3 bg-white/70 rounded-full" />
-				</div>
-			</motion.div>
 		</section>
 	)
 }

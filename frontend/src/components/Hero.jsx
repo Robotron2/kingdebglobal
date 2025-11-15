@@ -5,6 +5,7 @@ import { TrendingUp, Leaf } from "lucide-react"
 import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
 import pineBg from "/hero.webp"
+import { Link } from "react-router-dom"
 
 export function Hero() {
 	const { theme } = useTheme()
@@ -28,7 +29,7 @@ export function Hero() {
 					whileInView={"show"}
 					viewport={{ once: false, amount: 0.4 }}>
 					<motion.h5
-						className="text-3xl md:text-5xl lg:text-7xl  font-bold text-white mb-6 text-balance"
+						className="text-4xl md:text-5xl lg:text-7xl  font-bold text-white mb-6 text-balance mt-8"
 						variants={fadeIn("down", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -41,7 +42,7 @@ export function Hero() {
 						is Life, <span className="text-primary ">Green </span> is Wealth
 					</motion.h5>
 					<motion.h1
-						className="text-xl md:text-3xl lg:text-5xl font-bold text-white mb-6 text-balance"
+						className="text-lg md:text-3xl lg:text-5xl font-bold text-white mb-6 text-balance"
 						variants={fadeIn("up", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -52,7 +53,7 @@ export function Hero() {
 					</motion.h1>
 
 					<motion.p
-						className="text-base md:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
+						className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
 						variants={fadeIn("left", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -67,13 +68,17 @@ export function Hero() {
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
-						<button className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+						<a
+							href="#products"
+							className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6 w-1/2 md:w-1/4">
 							Shop
-						</button>
+						</a>
 
-						<button className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+						<Link
+							to={"/contact-us"}
+							className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6 w-1/2 md:w-1/4">
 							Invest
-						</button>
+						</Link>
 					</motion.div>
 
 					{/* Trust Badges */}
@@ -96,7 +101,7 @@ export function Hero() {
 			</div>
 
 			{/* Scroll Indicator */}
-			<motion.div
+			{/* <motion.div
 				className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
 				initial={{ opacity: 0, y: -10 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -104,7 +109,7 @@ export function Hero() {
 				<div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
 					<div className="w-1.5 h-3 bg-white/70 rounded-full" />
 				</div>
-			</motion.div>
+			</motion.div> */}
 		</section>
 	)
 }
