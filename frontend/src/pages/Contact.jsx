@@ -97,9 +97,9 @@ const Contact = () => {
 						viewport={{ once: false, amount: 0.4 }}>
 						<h2 className="text-2xl font-semibold text-secondary mb-4">Get In Touch</h2>
 						<p className="text-primary-content-600 mb-6">
-							At <strong className="font-semibold">The0 Ltd</strong>, we’re always here to connect with
-							our growers, investors, and pineapple lovers. Reach out via phone, email, or our contact
-							form — we’ll get back to you as soon as possible.
+							At <strong className="font-semibold">King Deb Global</strong>, we’re always here to connect
+							with our growers, investors, and pineapple lovers. Reach out via phone, email, or our
+							contact form — we’ll get back to you as soon as possible.
 						</p>
 
 						<div className="space-y-3">
