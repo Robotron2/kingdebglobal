@@ -28,20 +28,20 @@ export function Hero() {
 					whileInView={"show"}
 					viewport={{ once: false, amount: 0.4 }}>
 					<motion.h5
-						className="text-6xl md:text-7xl sm:text-5xl  font-bold text-white mb-6 text-balance"
+						className="text-3xl md:text-5xl lg:text-7xl  font-bold text-white mb-6 text-balance"
 						variants={fadeIn("down", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
 						<span
-							className="text-primary
+							className="text-primary 
                         ">
 							Green
 						</span>{" "}
-						is Life, <span className="text-primary">Green </span> is Wealth
+						is Life, <span className="text-primary ">Green </span> is Wealth
 					</motion.h5>
 					<motion.h1
-						className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 text-balance"
+						className="text-xl md:text-3xl lg:text-5xl font-bold text-white mb-6 text-balance"
 						variants={fadeIn("up", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -52,7 +52,7 @@ export function Hero() {
 					</motion.h1>
 
 					<motion.p
-						className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
+						className="text-base md:text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty font-semibold"
 						variants={fadeIn("left", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -67,18 +67,18 @@ export function Hero() {
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
-						<button className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6">
-							Shop Now
+						<button className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+							Shop
 						</button>
 
-						<button className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6">
-							Invest Today
+						<button className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+							Invest
 						</button>
 					</motion.div>
 
 					{/* Trust Badges */}
 					<motion.div
-						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8"
+						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8"
 						variants={fadeIn("left", 0.1)}
 						initial="hidden"
 						whileInView={"show"}

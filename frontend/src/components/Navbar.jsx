@@ -67,7 +67,7 @@ const Navbar = () => {
 						<div className="relative lg:hidden">
 							<button
 								onClick={() => setMobileOpen(!mobileOpen)}
-								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0">
+								className="btn btn-circle text-gray-100 bg-primary hover:bg-secondary transition-all duration-300 border-none outline-none mr-1 p-0 mb-3">
 								<i className="bi bi-list text-lg font-bold"></i>
 							</button>
 
@@ -103,9 +103,7 @@ const Navbar = () => {
 								alt="Kngdgb logo"
 								className="w-24 h-24 object-contain bg-red-00 -ml-8 sm:-ml-0 -mr-7"
 							/>
-							<span className="hidden sm:block text-nowrap text-sm md:text-xl w-full">
-								King Deb Global
-							</span>
+							<span className="text-nowrap text-sm md:text-xl w-full">King Deb Global</span>
 						</Link>
 					</div>
 
@@ -126,7 +124,7 @@ const Navbar = () => {
 						<div className="relative">
 							<button
 								onClick={() => setOpen(!open)}
-								className="btn btn-circle transition-transform hover:scale-110">
+								className="btn btn-circle transition-transform hover:scale-110 mb-3">
 								{theme === "light" && <i className="bi bi-sun text-xl"></i>}
 								{theme === "dark" && <i className="bi bi-moon text-xl"></i>}
 								{theme === "system" && <i className="bi bi-laptop text-xl"></i>}
