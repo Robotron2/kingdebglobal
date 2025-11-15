@@ -7,6 +7,7 @@ import { Testimonials } from "../components/Testimonials"
 import { motion } from "framer-motion"
 import { fadeIn } from "../../utils/data/variants"
 import Faq from "../components/FAQ"
+import HomeVideo from "../components/HomeVideo"
 
 const Home = () => {
 	return (
@@ -36,6 +37,7 @@ const Home = () => {
 			<InvestmentWidget />
 			<Testimonials />
 			<Faq />
+			<HomeVideo />
 			{/* <Footer /> */}
 		</main>
 	)
