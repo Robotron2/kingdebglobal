@@ -31,7 +31,7 @@ const About = () => {
 
 							<YouTubeEmbed
 								src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
-								className="h-full lg:h-[350px] w-full"
+								className="h-full lg:h-[350px] w-full bg-base-200"
 							/>
 						</div>
 
@@ -40,7 +40,7 @@ const About = () => {
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
 								<YouTubeEmbed
 									src="https://www.youtube.com/embed/5oPHFi3w9RQ?si=unYI0cc_bzcuNA9x"
-									className="w-full aspect-video h-full"
+									className="w-full aspect-video h-full bg-base-200"
 								/>
 							</div>
 
@@ -48,7 +48,7 @@ const About = () => {
 							<div className="w-1/2 rounded-2xl shadow-xl overflow-hidden aspect-video">
 								<YouTubeEmbed
 									src={"https://www.youtube.com/embed/YneB51dWi-o?si=LUiIznjij14hvsfu"}
-									className="w-full aspect-video h-full"
+									className="w-full aspect-video h-full bg-base-200"
 								/>
 							</div>
 						</div>

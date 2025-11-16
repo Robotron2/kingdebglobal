@@ -9,8 +9,8 @@ import { fadeIn } from "../../utils/data/variants"
 
 export function InvestmentWidget() {
 	const [months, setMonths] = useState([12])
-	const minInvestment = 1000
-	const returnRate = 0.08 // 8% annual return
+	const minInvestment = 200000
+	const returnRate = 0.4 // 40% annual return
 	const { theme } = useTheme()
 
 	const calculateReturns = (term) => {
@@ -60,14 +60,14 @@ export function InvestmentWidget() {
 								<Slider
 									value={months}
 									onValueChange={setMonths}
-									min={3}
-									max={24}
+									min={18}
+									max={48}
 									step={3}
 									className="mb-2"
 								/>
 
 								<div className="flex justify-between text-xs text-muted-foreground">
-									<span>3 months</span>
+									<span>18 months</span>
 									<span>24 months</span>
 								</div>
 							</div>
@@ -110,7 +110,7 @@ export function InvestmentWidget() {
 									</span>
 								</div>
 								<div className="flex items-center justify-between pt-3 border-t border-base-300">
-									<span className="text-sm font-medium text-card-foreground">Total Value</span>
+									<span className="text-sm font-medium text-card-foreground">ROI</span>
 									<span className="text-2xl font-bold text-primary">
 										₦
 										{(

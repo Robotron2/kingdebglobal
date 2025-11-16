@@ -24,7 +24,7 @@ const HomeVideo = () => {
 
 					<YouTubeEmbed
 						src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
-						className="h-full lg:h-[350px] w-full"
+						className="h-full lg:h-[350px] w-full bg-base-200"
 						minSkeletonMs={300}
 						fallbackTimeoutMs={8000}
 						onReady={() => console.log("iframe visually ready")}
