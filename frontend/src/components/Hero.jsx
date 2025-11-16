@@ -6,6 +6,7 @@ import { useTheme } from "../hooks/useTheme"
 import { fadeIn } from "../../utils/data/variants"
 import pineBg from "/hero.webp"
 import { Link } from "react-router-dom"
+import YouTubeEmbed from "./YoutubeEmbed"
 
 export function Hero() {
 	const { theme } = useTheme()
@@ -22,14 +23,14 @@ export function Hero() {
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 max-w-7xl -mt-20 mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+			<div className="relative z-10 max-w-7xl -mt-16 mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
 				<motion.div
 					variants={fadeIn("down", 0.1)}
 					initial="hidden"
 					whileInView={"show"}
 					viewport={{ once: false, amount: 0.4 }}>
 					<motion.h5
-						className="text-4xl md:text-5xl lg:text-7xl  font-bold text-white mb-6 text-balance mt-8"
+						className="text-4xl md:text-5xl lg:text-7xl  font-bold text-white mb-6 text-balance mt-2"
 						variants={fadeIn("down", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
@@ -60,56 +61,38 @@ export function Hero() {
 						viewport={{ once: false, amount: 0.4 }}>
 						Experience the sweetest, most sustainable pineapples. Shop premium produce or invest in the
 						future of tropical agriculture.
+						<span className="flex text-center items-center justify-center gap-2">
+							<small>100% Ogranic</small>
+							<small>Sustainable Farming</small>
+						</span>
 					</motion.p>
 
 					<motion.div
-						className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 "
+						className="flex flex-row items-center justify-center gap-4 mb-12 -mt-2"
 						variants={fadeIn("right", 0.1)}
 						initial="hidden"
 						whileInView={"show"}
 						viewport={{ once: false, amount: 0.4 }}>
 						<a
 							href="#products"
-							className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+							className="btn  bg-accent text-primary hover:bg-accent/90 font-semibold text-lg px-6 w-1/3 md:w-1/4">
 							Shop
 						</a>
 
 						<Link
 							to={"/contact-us"}
-							className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6 w-1/2 md:w-1/4">
+							className="btn bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20 font-semibold text-lg px-6 w-1/3 md:w-1/4">
 							Invest
 						</Link>
 					</motion.div>
-
-					{/* Trust Badges */}
-					<motion.div
-						className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8"
-						variants={fadeIn("left", 0.1)}
-						initial="hidden"
-						whileInView={"show"}
-						viewport={{ once: false, amount: 0.4 }}>
-						<div className="flex items-center gap-2 text-muted-light">
-							<Leaf className="h-5 w-5 text-primary" />
-							<span className="text-base font-semibold">100% Organic</span>
-						</div>
-						<div className="flex items-center gap-2 text-white/90">
-							<TrendingUp className="h-5 w-5 text-accent" />
-							<span className="text-base font-semibold">Sustainable Farming</span>
-						</div>
-					</motion.div>
 				</motion.div>
-			</div>
-
-			{/* Scroll Indicator */}
-			{/* <motion.div
-				className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-				initial={{ opacity: 0, y: -10 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6, delay: 0.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}>
-				<div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-					<div className="w-1.5 h-3 bg-white/70 rounded-full" />
+				<div>
+					<YouTubeEmbed
+						src="https://www.youtube.com/embed/h0BxCpJM0Qs?si=Bhuz9kMgHRq4P9gA"
+						className="h-[180px] md:h-[350px] w-full bg-base-200 "
+					/>
 				</div>
-			</motion.div> */}
+			</div>
 		</section>
 	)
 }
